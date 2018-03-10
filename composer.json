@@ -1,0 +1,19 @@
+{
+  "name": "troemer/Final",
+  "authors": [
+    {
+      "name": "Tyler Roemer",
+      "email": "troemer@mail.greenriver.edu"
+    },
+    {
+      "name": "Pavel Radchuk",
+      "email": "pradchuk2@mail.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  },
+  "autoload": {
+    "classmap": ["classes/"]
+  }
+}

@@ -9,22 +9,13 @@ class Project
     private $client;
     private $class;
 
-    function __construct($title, $description, $links, $credentials, $client, $class)
+    function __construct($title, $description, $links, Client $client, SchoolClass $class)
     {
-        $this->title = title;
-        $this->description = $description;
-        $this->links = $links;
-        $this->credentials = $credentials;
+        $this->setTitle($title);
+        $this->setDescription($description);
+        $this->setLinks($links);
         $this->client = $client;
         $this->class = $class;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTitle()
-    {
-        return $this->title;
     }
 
     /**
@@ -32,7 +23,62 @@ class Project
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = strip_tags($title);
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = strip_tags($description);
+    }
+
+    /**
+     * @param mixed $links
+     */
+    public function setLinks($links)
+    {
+        //Find out how to validate urls
+        $this->links = $links;
+    }
+
+    /**
+     * @param $username
+     * @param $password
+     */
+    public function setCredentials($username, $password)
+    {
+        $this->credentials = array(
+            "username" => strip_tags($username),
+            "password" => strip_tags($password)
+        );
+    }
+
+    /**
+     * @param Client $client
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+    }
+
+    /**
+     * @param SchoolClass $class
+     */
+    public function setClass($class)
+    {
+        $this->class = $class;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
@@ -44,27 +90,11 @@ class Project
     }
 
     /**
-     * @param mixed $description
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    /**
      * @return mixed
      */
     public function getLinks()
     {
         return $this->links;
-    }
-
-    /**
-     * @param mixed $links
-     */
-    public function setLinks($links)
-    {
-        $this->links = $links;
     }
 
     /**
@@ -76,15 +106,7 @@ class Project
     }
 
     /**
-     * @param mixed $credentials
-     */
-    public function setCredentials($credentials)
-    {
-        $this->credentials = $credentials;
-    }
-
-    /**
-     * @return mixed
+     * @return Client
      */
     public function getClient()
     {
@@ -92,26 +114,10 @@ class Project
     }
 
     /**
-     * @param mixed $client
-     */
-    public function setClient($client)
-    {
-        $this->client = $client;
-    }
-
-    /**
-     * @return mixed
+     * @return SchoolClass
      */
     public function getClass()
     {
         return $this->class;
-    }
-
-    /**
-     * @param mixed $class
-     */
-    public function setClass($class)
-    {
-        $this->class = $class;
     }
 }

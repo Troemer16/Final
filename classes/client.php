@@ -6,12 +6,12 @@ class Client extends Contact
     private $location;
     private $siteURL;
 
-    /**
-     * @return mixed
-     */
-    public function getCompanyName()
+    public function __construct($company, $location, $url, $name, $title, $email, $phone)
     {
-        return $this->companyName;
+        parent::__constuct($name, $title, $email, $phone);
+        $this->setCompanyName($company);
+        $this->setLocation($location);
+        $this->setSiteURL($url);
     }
 
     /**
@@ -19,7 +19,33 @@ class Client extends Contact
      */
     public function setCompanyName($companyName)
     {
-        $this->companyName = $companyName;
+        $this->companyName = strip_tags($companyName);
+    }
+
+    /**
+     * @param mixed $location
+     */
+    public function setLocation($location)
+    {
+        $this->location = strip_tags($location);
+    }
+
+    /**
+     * @param mixed $siteURL
+     */
+    public function setSiteURL($siteURL)
+    {
+        //Find out how to validate urls
+        $this->siteURL = $siteURL;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getCompanyName()
+    {
+        return $this->companyName;
     }
 
     /**
@@ -31,26 +57,10 @@ class Client extends Contact
     }
 
     /**
-     * @param mixed $location
-     */
-    public function setLocation($location)
-    {
-        $this->location = $location;
-    }
-
-    /**
      * @return mixed
      */
     public function getSiteURL()
     {
         return $this->siteURL;
-    }
-
-    /**
-     * @param mixed $siteURL
-     */
-    public function setSiteURL($siteURL)
-    {
-        $this->siteURL = $siteURL;
     }
 }

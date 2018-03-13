@@ -3,6 +3,9 @@
     ini_set("display_errors", 1);
     error_reporting(E_ALL);
 
+    //session
+    session_start();
+
     //require the autoload file
     require_once ('vendor/autoload.php');
 
@@ -18,6 +21,18 @@
         //load a template
         $template = new Template();
         echo $template->render('views/viewProjects.html');
+    });
+
+    $f3->route('GET /create', function() {
+        //load a template
+        $template = new Template();
+        echo $template->render('views/createProject.html');
+    });
+
+    $f3->route('GET /edit', function() {
+        //load a template
+        $template = new Template();
+        echo $template->render('views/createProject.html');
     });
 
     //Run Fat-Free

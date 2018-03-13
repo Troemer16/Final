@@ -7,12 +7,12 @@ class Contact
     protected $email;
     protected $phone;
 
-    /**
-     * @return mixed
-     */
-    public function getName()
+    public function __construct($name, $title, $email, $phone)
     {
-        return $this->name;
+        $this->setName($name);
+        $this->setTitle($title);
+        $this->setEmail($email);
+        $this->setPhone($phone);
     }
 
     /**
@@ -20,7 +20,42 @@ class Contact
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = strip_tags($name);
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = strip_tags($title);
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email)
+    {
+        //use regex here
+        $this->email = $email;
+    }
+
+    /**
+     * @param mixed $phone
+     */
+    public function setPhone($phone)
+    {
+        if(is_numeric($phone) && strlen($phone) == 10)
+            $this->phone = $phone;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -32,14 +67,6 @@ class Contact
     }
 
     /**
-     * @param mixed $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    /**
      * @return mixed
      */
     public function getEmail()
@@ -48,26 +75,10 @@ class Contact
     }
 
     /**
-     * @param mixed $email
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    /**
      * @return mixed
      */
     public function getPhone()
     {
         return $this->phone;
-    }
-
-    /**
-     * @param mixed $phone
-     */
-    public function setPhone($phone)
-    {
-        $this->phone = $phone;
     }
 }

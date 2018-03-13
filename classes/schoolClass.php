@@ -1,73 +1,83 @@
 <?php
 
-class schoolClass
+class SchoolClass
 {
-    private $className;
-    private $classInstructor;
-    private $schoolQuarter;
-    private $instructorNotes;
+    private $name;
+    private $instructor;
+    private $quarter;
+    private $notes;
 
-    /**
-     * @return mixed
-     */
-    public function getClassName()
+    public function __construct($name, $instructor, $quarter, $notes)
     {
-        return $this->className;
+        $this->setName($name);
+        $this->setInstructor($instructor);
+        $this->setQuarter($quarter);
+        $this->setNotes($notes);
     }
 
     /**
-     * @param mixed $className
+     * @param mixed $name
      */
-    public function setClassName($className)
+    public function setName($name)
     {
-        $this->className = $className;
+        $this->name = strip_tags($name);
     }
 
     /**
-     * @return mixed
+     * @param mixed $instructor
      */
-    public function getClassInstructor()
+    public function setInstructor($instructor)
     {
-        return $this->classInstructor;
+        $this->instructor = strip_tags($instructor);
     }
 
     /**
-     * @param mixed $classInstructor
+     * @param mixed $quarter
      */
-    public function setClassInstructor($classInstructor)
+    public function setQuarter($quarter)
     {
-        $this->classInstructor = $classInstructor;
+        $quarters = array('spring', 'summer', 'fall', 'winter');
+        if(in_array($quarter, $quarters))
+            $this->quarter = $quarter;
     }
 
     /**
-     * @return mixed
+     * @param mixed $notes
      */
-    public function getSchoolQuarter()
+    public function setNotes($notes)
     {
-        return $this->schoolQuarter;
-    }
-
-    /**
-     * @param mixed $schoolQuarter
-     */
-    public function setSchoolQuarter($schoolQuarter)
-    {
-        $this->schoolQuarter = $schoolQuarter;
+        $this->notes = strip_tags($notes);
     }
 
     /**
      * @return mixed
      */
-    public function getInstructorNotes()
+    public function getName()
     {
-        return $this->instructorNotes;
+        return $this->name;
     }
 
     /**
-     * @param mixed $instructorNotes
+     * @return mixed
      */
-    public function setInstructorNotes($instructorNotes)
+    public function getInstructor()
     {
-        $this->instructorNotes = $instructorNotes;
+        return $this->instructor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuarter()
+    {
+        return $this->quarter;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNotes()
+    {
+        return $this->notes;
     }
 }

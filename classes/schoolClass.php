@@ -5,13 +5,15 @@ class SchoolClass
     private $name;
     private $instructor;
     private $quarter;
+    private $year;
     private $notes;
 
-    public function __construct($name, $instructor, $quarter, $notes)
+    public function __construct($name, $instructor, $quarter, $year, $notes)
     {
         $this->setName($name);
         $this->setInstructor($instructor);
         $this->setQuarter($quarter);
+        $this->setYear($year);
         $this->setNotes($notes);
     }
 
@@ -39,6 +41,15 @@ class SchoolClass
         $quarters = array('spring', 'summer', 'fall', 'winter');
         if(in_array($quarter, $quarters))
             $this->quarter = $quarter;
+    }
+
+    /**
+     * @param int year
+     */
+    public function setYear($year)
+    {
+        if(is_numeric($year) && strlen($year) == 4)
+            $this->year = $year;
     }
 
     /**

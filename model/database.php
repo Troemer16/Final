@@ -3,7 +3,7 @@
 //include configuration file
 require_once ('/home/troemerg/public_html/config.php');
 
-class Database
+final class Database
 {
     private static $dbh;
     private static $initialized = false;
@@ -67,8 +67,8 @@ class Database
 
         //Add Class*******************************************
         //Define the query
-        $sql = "INSERT INTO `classes`(`name`, `instructor`, `quarter`, `notes`) 
-                VALUES (:name, :instructor, :quarter, :notes)";
+        $sql = "INSERT INTO `classes`(`name`, `instructor`, `quarter`, `year`, notes`) 
+                VALUES (:name, :instructor, :quarter, :year, :notes)";
 
         //Prepare the statement
         $statement = self::$dbh->prepare($sql);
@@ -78,6 +78,7 @@ class Database
         $statement->bindParam(':name', $temp->getName(), PDO::PARAM_STR);
         $statement->bindParam(':instructor', $temp->getInstructor(), PDO::PARAM_STR);
         $statement->bindParam(':quarter', $temp->getQuarter(), PDO::PARAM_STR);
+        $statement->bindParam(':year', $temp->getYear(), PDO::PARAM_STR);
         $statement->bindParam(':notes', $temp->getNotes(), PDO::PARAM_STR);
 
         //Execute
@@ -109,20 +110,21 @@ class Database
 
     public static function getProjects()
     {
-//        //Define the query
-//        $sql = "SELECT member_id, fname, lname, age, phone, email, state,
-//                    gender, seeking, premium, interests FROM Members ORDER BY lname";
-//
-//        //Prepare the statement
-//        $statement = $this->dbh->prepare($sql);
-//
-//        //Execute the statement
-//        $statement->execute();
-//
-//        //Process the result
-//        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-//
-//        return $result;
+        self::initialize();
+
+        //Define the query
+        $sql = "SELECT title, description, links, status FROM projects ORDER BY title";
+
+        //Prepare the statement
+        $statement = self::$dbh->prepare($sql);
+
+        //Execute the statement
+        $statement->execute();
+
+        //Process the result
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
     }
 
     public static function getProject($id)

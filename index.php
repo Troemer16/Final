@@ -18,6 +18,8 @@
 
     //Define a default route
     $f3->route('GET /', function() {
+        //print_r(Database::getProjects());
+
         //load a template
         $template = new Template();
         echo $template->render('views/viewProjects.html');

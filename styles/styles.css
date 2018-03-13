@@ -1,0 +1,12 @@
+section#description.col-6{
+    text-align: center;
+}
+textarea{
+    width: 100%;
+}
+div#status{
+    margin-left: 0.9em;
+}
+label{
+    margin-bottom: 0%;
+}

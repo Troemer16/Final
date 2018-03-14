@@ -17,8 +17,9 @@
     $f3->set('DEBUG', 3);
 
     //Define a default route
-    $f3->route('GET /', function() {
-        //print_r(Database::getProjects());
+    $f3->route('GET /', function($f3) {
+        $projects = Database::getProjects();
+        $f3->set('projects', $projects);
 
         //load a template
         $template = new Template();

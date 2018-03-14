@@ -27,69 +27,20 @@ final class Database
         self::initialize();
 
         //Add Client*****************************************
-        //Define the query
-        $sql = "INSERT INTO `clients`(`companyName`, `location`, `siteURL`) 
-                VALUES (:name, :location, :url)";
-
-        //Prepare the statement
-        $statement = self::$dbh->prepare($sql);
-        $temp = $project->getClient();
-
-        //Bind the parameters
-        $statement->bindParam(':name', $temp->getCompanyName(), PDO::PARAM_STR);
-        $statement->bindParam(':location', $temp->getLocation(), PDO::PARAM_STR);
-        $statement->bindParam(':url', $temp->getSiteURL(), PDO::PARAM_STR);
-
-        //Execute
-        $statement->execute();
-
-        $client = self::$dbh->lastInsertId();
+        $client = self::addClient($project->getClient());
 
 
         //Add Contact************************************
-        //Define the query
-        $sql = "INSERT INTO `contacts`(`name`, `title`, `email`, `phone`, clientId`) 
-                VALUES (:name, :title, :email, :phone, :client)";
-
-        //Prepare the statement
-        $statement = self::$dbh->prepare($sql);
-
-        //Bind the parameters
-        $statement->bindParam(':name', $temp->getName(), PDO::PARAM_STR);
-        $statement->bindParam(':title', $temp->getTitle(), PDO::PARAM_STR);
-        $statement->bindParam(':email', $temp->getEmail(), PDO::PARAM_STR);
-        $statement->bindParam(':phone', $temp->getPhone(), PDO::PARAM_STR);
-        $statement->bindParam(':client', $client, PDO::PARAM_STR);
-
-        //Execute
-        $statement->execute();
+        self::addContact($project->getClient());
 
 
         //Add Class*******************************************
-        //Define the query
-        $sql = "INSERT INTO `classes`(`name`, `instructor`, `quarter`, `year`, notes`) 
-                VALUES (:name, :instructor, :quarter, :year, :notes)";
-
-        //Prepare the statement
-        $statement = self::$dbh->prepare($sql);
-        $temp = $project->getClass();
-
-        //Bind the parameters
-        $statement->bindParam(':name', $temp->getName(), PDO::PARAM_STR);
-        $statement->bindParam(':instructor', $temp->getInstructor(), PDO::PARAM_STR);
-        $statement->bindParam(':quarter', $temp->getQuarter(), PDO::PARAM_STR);
-        $statement->bindParam(':year', $temp->getYear(), PDO::PARAM_STR);
-        $statement->bindParam(':notes', $temp->getNotes(), PDO::PARAM_STR);
-
-        //Execute
-        $statement->execute();
-
-        $class = self::$dbh->lastInsertId();
+        $class = self::addClass($project->getClass());
 
 
         // Add Project****************************************
         //Define the query
-        $sql = "INSERT INTO `projects`(`title`, `description`, `links`, `username`, `password`, `clientId`, `classId`) 
+        $sql = "INSERT INTO `projects`(`title`, `description`, `links`, `username`, `password`, `clientId`, `classId`)
                 VALUES (:title, :description, :links, :username, :password, :client, :class)";
 
         //Prepare the statement
@@ -111,9 +62,10 @@ final class Database
     public static function getProjects()
     {
         self::initialize();
+        $projects = array();
 
         //Define the query
-        $sql = "SELECT title, description, links, status FROM projects ORDER BY title";
+        $sql = "SELECT projectId, title, description, links, status FROM projects ORDER BY projectId";
 
         //Prepare the statement
         $statement = self::$dbh->prepare($sql);
@@ -124,11 +76,91 @@ final class Database
         //Process the result
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-        return $result;
+//        foreach ($result as $item) {
+//            $projects[]
+//        }
     }
 
     public static function getProject($id)
     {
+        self::initialize();
 
+        //Define the query
+        $sql = "SELECT title, description, links, status FROM projects
+                WHERE projectId = :id";
+
+        //Prepare the statement
+        $statement = self::$dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':id', $id, PDO::PARAM_STR);
+
+        //Execute the statement
+        $statement->execute();
+
+        //Process the result
+        $result = $statement->fetch();
+
+        return $result;
+    }
+
+    private static function addClient($client)
+    {
+        //Define the query
+        $sql = "INSERT INTO `clients`(`companyName`, `location`, `siteURL`) 
+                VALUES (:name, :location, :url)";
+
+        //Prepare the statement
+        $statement = self::$dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':name', $client->getCompanyName(), PDO::PARAM_STR);
+        $statement->bindParam(':location', $client->getLocation(), PDO::PARAM_STR);
+        $statement->bindParam(':url', $client->getSiteURL(), PDO::PARAM_STR);
+
+        //Execute
+        $statement->execute();
+
+        return self::$dbh->lastInsertId();
+    }
+    private static function addContact($client)
+    {
+        //Define the query
+        $sql = "INSERT INTO `contacts`(`name`, `title`, `email`, `phone`, `clientId`) 
+                VALUES (:name, :title, :email, :phone, :client)";
+
+        //Prepare the statement
+        $statement = self::$dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':name', $client->getName(), PDO::PARAM_STR);
+        $statement->bindParam(':title', $client->getTitle(), PDO::PARAM_STR);
+        $statement->bindParam(':email', $client->getEmail(), PDO::PARAM_STR);
+        $statement->bindParam(':phone', $client->getPhone(), PDO::PARAM_STR);
+        $statement->bindParam(':client', $client, PDO::PARAM_STR);
+
+        //Execute
+        $statement->execute();
+    }
+    private static function addClass($class)
+    {
+        //Define the query
+        $sql = "INSERT INTO `classes`(`name`, `instructor`, `quarter`, `year`, `notes`) 
+                VALUES (:name, :instructor, :quarter, :year, :notes)";
+
+        //Prepare the statement
+        $statement = self::$dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':name', $class->getName(), PDO::PARAM_STR);
+        $statement->bindParam(':instructor', $class->getInstructor(), PDO::PARAM_STR);
+        $statement->bindParam(':quarter', $class->getQuarter(), PDO::PARAM_STR);
+        $statement->bindParam(':year', $class->getYear(), PDO::PARAM_STR);
+        $statement->bindParam(':notes', $class->getNotes(), PDO::PARAM_STR);
+
+        //Execute
+        $statement->execute();
+
+        return self::$dbh->lastInsertId();
     }
 }

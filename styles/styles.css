@@ -4,9 +4,19 @@ section#description.col-6{
 textarea{
     width: 100%;
 }
+input#submit{
+    margin-top: 1em;
+}
 div#status{
     margin-left: 0.9em;
 }
 label{
     margin-bottom: 0%;
+}
+div.tab-pane{
+    padding-top: 0.5em;
+    width: 100%;
+}
+div.row{
+    margin: 0px;
 }

@@ -62,10 +62,9 @@ final class Database
     public static function getProjects()
     {
         self::initialize();
-        $projects = array();
 
         //Define the query
-        $sql = "SELECT projectId, title, description, links, status FROM projects ORDER BY projectId";
+        $sql = "SELECT projectId, title, description, links, status, clientId FROM projects";
 
         //Prepare the statement
         $statement = self::$dbh->prepare($sql);
@@ -76,9 +75,7 @@ final class Database
         //Process the result
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-//        foreach ($result as $item) {
-//            $projects[]
-//        }
+        return $result;
     }
 
     public static function getProject($id)

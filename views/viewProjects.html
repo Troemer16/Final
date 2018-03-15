@@ -11,13 +11,18 @@
         <!-- Datatables -->
         <link rel="stylesheet" href="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
 
+        <!-- JQuery UI CSS -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+        <link rel="stylesheet" href="styles/viewProjects.css">
+
         <title>Project Directory</title>
 
     </head>
 
     <body>
 
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+    <nav class="navbar navbar-expand-sm bg-success navbar-dark fixed-top">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
                 data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -28,16 +33,15 @@
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link " href="createProject.html">New Project</a>
+                    <a class="nav-link " href="create">New Project</a>
                 </li>
                 <li id="edit" class="nav-item">
-                    <a class="nav-link" href="editProject.html">Edit Project</a>
-                </li>
-                <li id="login" class="nav-item">
-                    <a class="nav-link" href="">login</a>
+                    <a class="nav-link" href="edit">Edit Project</a>
                 </li>
             </ul>
         </div>
+
+        <a class="navbar-brand" href="">Login</a>
     </nav>
 
 
@@ -49,30 +53,35 @@
         <pre>
 
         </pre>
-            <table id="pro-data" class="display" cellspacing="0">
-                <thead>
-                <tr>
-                    <th>Project Description</th>
-                    <th>Project Title</th>
-                    <!--<th>Client</th>-->
-                    <th>Links</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
+        <table id="pro-data" class="display" cellspacing="0">
+            <thead>
+            <tr>
+                <th>Project Description</th>
+                <th>Project Title</th>
+                <th>Client</th>
+                <th>Links</th>
+                <th>Status</th>
+            </tr>
+            </thead>
 
-                <tbody>
-                <repeat group="{{ @projects }}" value="{{ @project }}">
-                <tr id="{{ @project['projectID'] }}">
+            <tbody>
+            <repeat group="{{ @projects }}" value="{{ @project }}">
+                <tr id="{{ @project['projectID'] }}" class="viewProject">
                     <td>{{ @project['description'] }}</td>
                     <td>{{ @project['title'] }}</td>
-                    <!--<td>{{ @project['client'] }}</td>-->
-                    <td>{{ @project['links'] }}</td>
+                    <td>{{ @project['companyName'] }}</td>
+                    <td><a href="{{ @project['links'] }}">link...</a></td>
                     <td>{{ @project['status'] }}</td>
                 </tr>
-                </repeat>
+            </repeat>
 
-                </tbody>
-            </table>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div id="dialog" title="Basic dialog">
+        <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
     </div>
 
 
@@ -80,12 +89,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
 
     <script>
         var table = $('#pro-data').DataTable();
         table.column( 0 ).visible( false );
-        table.columns.adjust().draw( false );
+
+        $("#dialog").dialog({
+            autoOpen: false
+        });
+
+        $(".viewProject").on('click', function() {
+            $("#dialog").dialog('open');
+        });
     </script>
     </body>
 </html>

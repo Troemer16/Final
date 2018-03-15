@@ -1,4 +1,4 @@
-section#description.col-6{
+section#description, section#instructNotes{
     text-align: center;
 }
 textarea{

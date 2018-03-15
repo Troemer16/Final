@@ -1,0 +1,7 @@
+.display
+{
+    border: solid;
+    border-color: gray;
+    border-width: thin;
+    border-collapse: collapse;
+}

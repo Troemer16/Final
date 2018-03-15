@@ -64,7 +64,8 @@ final class Database
         self::initialize();
 
         //Define the query
-        $sql = "SELECT projectId, title, description, links, status, clientId FROM projects";
+        $sql = "SELECT title, description, links, status, companyName FROM projects, clients
+                WHERE clients.clientId = projects.clientId";
 
         //Prepare the statement
         $statement = self::$dbh->prepare($sql);

@@ -7,12 +7,12 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <link rel="stylesheet" type="text/css" href="styles/styles.css">
+        <link rel="stylesheet" type="text/css" href="styles/newProject.css">
 
-        <title>Edit Projects</title>
+        <title>Create Project</title>
     </head>
     <body>
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+        <nav class="navbar navbar-expand-sm bg-success navbar-dark fixed-top">
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -21,16 +21,15 @@
             <div class="collapse navbar-collapse" id="navbarToggler">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="viewProjects.html">View Project</a>
+                        <a class="nav-link" href="../Final">View Project</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="editProject.html">Edit Project</a>
-                    </li>
-                    <li id="logout" class="nav-item">
-                        <a class="nav-link" href="">login</a>
+                        <a class="nav-link" href="edit">Edit Project</a>
                     </li>
                 </ul>
             </div>
+
+            <a class="navbar-brand" href="">Login</a>
         </nav>
         <form action="" method="post">
             <div class="container">
@@ -53,38 +52,47 @@
                         <!--Tab Content-->
                         <div class="row" >
                             <section class="col-6" >
-                                    <label for="title">Title :</label>
+                                    <label for="title">Title</label>
                                     <input class="form-control" id="title" name="title" type="text" value=""><br>
-                                    <label for="url">Url</label>
+                                    <label for="url">Project URL</label>
                                     <input class="form-control" id="url" name="url" type="text" value=""><br>
                                     <label for="trello">Trello</label>
                                     <input class="form-control" id="trello" name="trello" type="text" value=""><br>
                                     <label for="github">Github</label>
                                     <input class="form-control" id="github" name="github" type="text" value=""><br>
-
-
                             </section>
-                            <section id="description" class="col-6">
 
-                            <h2>Description</h2>
-                            <textarea name="description" type="inline" rows="5"></textarea>
+                            <section class="col-6">
+                                <section id="description">
+                                    <h2>Description</h2>
+                                    <textarea name="description" type="inline" rows="5"></textarea>
+                                </section>
+
+                                <label for="username">Project Username</label>
+                                <input class="form-control" id="username" name="username" type="text" value=""><br>
+                                <label for="password">Project Password</label>
+                                <input class="form-control" id="password" name="password" type="text" value=""><br>
                             </section>
+
                             <div id="status" class="form-group btn-group">
-                                <label class="btn btn-secondary">
+                                <label class="btn btn-success">
                                     <input name="status" type="radio" autocomplete="off" value="active" > Active
                                 </label>
-                                <label class="btn btn-secondary">
+                                <label class="btn btn-primary">
                                     <input name="status" type="radio" autocomplete="off" value="pending" > Pending
                                 </label>
-                                <label class="btn btn-secondary">
+                                <label class="btn btn-warning">
                                     <input name="status" type="radio" autocomplete="off" value="maintenance" > Maintenance
                                 </label>
-                                <label class="btn btn-secondary">
+                                <label class="btn btn-danger">
                                     <input name="status" type="radio" autocomplete="off" value="retired" > Retired
                                 </label>
                             </div>
                         </div>
                     </div>
+
+
+
                     <div class="tab-pane fade" id="client">
                         <div class="row">
                             <section id="company" class="col-6" >
@@ -93,9 +101,10 @@
                                 <input class="form-control" id="companyName" name="companyName" type="text" value=""><br>
                                 <label for="location">Location</label>
                                 <input class="form-control" id="location" name="location" type="text" value=""><br>
-                                <label for="siteUrl">Website url</label>
+                                <label for="siteUrl">Website</label>
                                 <input class="form-control" id="siteUrl" name="siteUrl" type="text" value=""><br>
                             </section>
+
                             <section id="contact" class="col-6">
                                 <h2>Contact</h2>
                                 <label for="contactName">Name</label>
@@ -109,6 +118,8 @@
                             </section>
                         </div>
                     </div>
+
+
                     <div class="tab-pane fade" id="class">
                         <div class="row">
                             <section class="col-6" >
@@ -118,19 +129,18 @@
                                 <input class="form-control" id="instructor" name="instructor" type="text" value=""><br>
                                 <label for="quarter">Quarter</label>
                                 <select class="form-control dropdown" id="quarter" name="quarter">
-                                    <option value="" selected="" disabled="disabled">-- select one --</option>
-                                    <option value="1">Fall</option>
-                                    <option value="2">Winter</option>
-                                    <option value="3">Spring</option>
-                                    <option value="4">Summer</option>
-                                </select>
+                                    <option value="" selected="" disabled="disabled">-- Select One --</option>
+                                    <option value="spring">Spring</option>
+                                    <option value="summer">Summer</option>
+                                    <option value="fall">Fall</option>
+                                    <option value="winter">Winter</option>
+                                </select><br>
                                 <label for="year">Year</label>
                                 <input class="form-control" id="year" name="year" type="text" value=""><br>
                             </section>
-                            <section id="info" class="col-5">
-
+                            <section id="instructNotes" class="col-6">
                                 <h2>Instructor Notes</h2>
-                                <textarea name="info" type="inline" rows="5"></textarea>
+                                <textarea name="instructNotes" type="inline" rows="11"></textarea>
                             </section>
                         </div>
                     </div>
@@ -138,9 +148,9 @@
             </div>
         </form>
 
-            <div class="container">
-                <input class="btn" name = "submit" type="submit" id="submit" value="Create Guest">
-            </div>
+        <div class="container">
+            <input class="btn btn-success" name = "submit" type="submit" id="submit" value="Create Guest">
+        </div>
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

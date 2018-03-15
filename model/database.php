@@ -26,6 +26,9 @@ final class Database
     {
         self::initialize();
 
+        echo $project;
+        return;
+
         //Add Client*****************************************
         $client = self::addClient($project->getClient());
 
@@ -105,15 +108,18 @@ final class Database
     private static function addClient($client)
     {
         //Define the query
-        $sql = "INSERT INTO `clients`(`companyName`, `location`, `siteURL`) 
-                VALUES (:name, :location, :url)";
+        $sql = "INSERT INTO `clients`(`companyName`, `address`, `zipcode`, `city`, `state`, `siteURL`) 
+                VALUES (:name, :address, :zipcode, :city, :state, :url)";
 
         //Prepare the statement
         $statement = self::$dbh->prepare($sql);
 
         //Bind the parameters
         $statement->bindParam(':name', $client->getCompanyName(), PDO::PARAM_STR);
-        $statement->bindParam(':location', $client->getLocation(), PDO::PARAM_STR);
+        $statement->bindParam(':address', $client->getLocation(), PDO::PARAM_STR);
+        $statement->bindParam(':zipcode', $client->getLocation(), PDO::PARAM_STR);
+        $statement->bindParam(':city', $client->getLocation(), PDO::PARAM_STR);
+        $statement->bindParam(':state', $client->getLocation(), PDO::PARAM_STR);
         $statement->bindParam(':url', $client->getSiteURL(), PDO::PARAM_STR);
 
         //Execute

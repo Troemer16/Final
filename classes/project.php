@@ -9,10 +9,11 @@ class Project
     private $client;
     private $class;
 
-    function __construct($title, $description, $links, Client $client, SchoolClass $class)
+    function __construct($title, $description, $username, $password, $links, Client $client, SchoolClass $class)
     {
         $this->setTitle($title);
         $this->setDescription($description);
+        $this->setCredentials($username, $password);
         $this->setLinks($links);
         $this->client = $client;
         $this->class = $class;
@@ -120,4 +121,13 @@ class Project
     {
         return $this->class;
     }
+
+//    public function printProject()
+//    {
+//        echo "<p>$this->title</p>";
+//        echo "<p>$this->description</p>";
+//        echo "<p>$this->links</p>";
+//        $this->client->printClient();
+//        $this->class->printClass();
+//    }
 }

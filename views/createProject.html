@@ -31,7 +31,7 @@
 
             <a class="navbar-brand" href="">Login</a>
         </nav>
-        <form action="" method="post">
+        <form action="#" method="post">
             <div class="container">
                 <br><br><br><br>
 
@@ -65,7 +65,7 @@
                             <section class="col-6">
                                 <section id="description">
                                     <h2>Description</h2>
-                                    <textarea name="description" type="inline" rows="5"></textarea>
+                                    <textarea name="description" type="inline" rows="5">{{ @description }}</textarea>
                                 </section>
 
                                 <label for="username">Project Username</label>
@@ -76,16 +76,20 @@
 
                             <div id="status" class="form-group btn-group">
                                 <label class="btn btn-success">
-                                    <input name="status" type="radio" autocomplete="off" value="{{ @active }}" > Active
+                                    <input name="status" type="radio" autocomplete="off" value="active"
+                                    <check if="@status == 'active'">checked</check>> Active
                                 </label>
                                 <label class="btn btn-primary">
-                                    <input name="status" type="radio" autocomplete="off" value="{{ @pending }}" > Pending
+                                    <input name="status" type="radio" autocomplete="off" value="pending"
+                                    <check if="@status == 'pending'">checked</check>> Pending
                                 </label>
                                 <label class="btn btn-warning">
-                                    <input name="status" type="radio" autocomplete="off" value="{{ @maintenance }}" > Maintenance
+                                    <input name="status" type="radio" autocomplete="off" value="maintenance"
+                                    <check if="@status == 'maintenance'">checked</check>> Maintenance
                                 </label>
                                 <label class="btn btn-danger">
-                                    <input name="status" type="radio" autocomplete="off" value="{{ @retired }}" > Retired
+                                    <input name="status" type="radio" autocomplete="off" value="retired"
+                                    <check if="@status == 'retired'">checked</check>> Retired
                                 </label>
                             </div>
                         </div>
@@ -98,10 +102,6 @@
                             <h3 class="col-4">Current Client?</h3>
                             <select class="form-control col-7 dropdown" id="cClient" name="cClient" value="{{ @cClient }}">
                                 <option value="" selected="" disabled="disabled">-- Returning Client --</option>
-                                <option value="{{ @rClient }}">Petter</option>
-                                <option value="{{ @rClient }}">Sam</option>
-                                <option value="{{ @rClient }}">Jhon</option>
-                                <option value="{{ @rClient }}">Tyler</option>
                             </select>
                         </div>
                         <hr>
@@ -110,8 +110,8 @@
                                 <h2>Company</h2>
                                 <label for="companyName">Name</label>
                                 <input class="form-control" id="companyName" name="companyName" type="text" value="{{ @companyName }}"><br>
-                                <label for="location">Location</label>
-                                <input class="form-control" id="location" name="location" type="text" value="{{ @location }}"><br>
+                                <label for="address">Address</label>
+                                <input class="form-control" id="address" name="address" type="text" value="{{ @address }}"><br>
                                 <div class="row">
                                     <div class="col-5">
                                         <label for="zipCode">Zip</label>
@@ -123,12 +123,13 @@
                                     </div>
                                     <div class="col-3">
                                         <label for="state">State</label>
-                                        <select class="form-control dropdown" id="state" name="state" value="{{ @state }}">
-                                            <option value="" selected="" disabled="disabled">-- state --</option>
-                                            <option value="WA">state</option>
-                                            <option value="OR">state</option>
-                                            <option value="ID">state</option>
-                                            <option value="CA">state</option>
+                                        <select class="form-control dropdown" id="state" name="state">
+                                            <option value="" selected disabled="disabled"></option>
+                                            <repeat group="{{ @states }}" value="{{ @state }}">
+                                                <option value="{{ @state }}"
+                                                <check if="@selState == @state">selected</check>>
+                                                {{ @state }}</option>
+                                            </repeat>
                                         </select>
                                     </div>
                                 </div><br>
@@ -162,27 +163,28 @@
                                 <label for="quarter">Quarter</label>
                                 <select class="form-control dropdown" id="quarter" name="quarter">
                                     <option value="" selected="" disabled="disabled">-- Select One --</option>
-                                    <option value="spring">Spring</option>
-                                    <option value="summer">Summer</option>
-                                    <option value="fall">Fall</option>
-                                    <option value="winter">Winter</option>
+                                    <repeat group="{{ @quarters }}" value="{{ @quarter }}">
+                                        <option value="{{ @quarter }}"
+                                        <check if="@selQuarter == @quarter">selected</check>>
+                                        {{ ucfirst(@quarter) }}</option>
+                                    </repeat>
                                 </select><br>
                                 <label for="year">Year</label>
                                 <input class="form-control" id="year" name="year" type="text" value="{{ @year }}"><br>
                             </section>
                             <section id="instructNotes" class="col-6">
                                 <h2>Instructor Notes</h2>
-                                <textarea name="instructNotes" type="inline" rows="11"></textarea>
+                                <textarea name="instructNotes" type="inline" rows="11">{{ @instructNotes }}</textarea>
                             </section>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="container">
+                <input class="btn btn-success" name="submit" type="submit" id="submit" value="Create Project">
+            </div>
         </form>
 
-        <div class="container">
-            <input class="btn btn-success" name="submit" type="submit" id="submit" value="Create Project">
-        </div>
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

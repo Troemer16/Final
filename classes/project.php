@@ -4,16 +4,18 @@ class Project
 {
     private $title;
     private $description;
-    private $links;
     private $credentials;
+    private $status;
+    private $links;
     private $client;
     private $class;
 
-    function __construct($title, $description, $username, $password, $links, Client $client, SchoolClass $class)
+    function __construct($title, $description, $username, $password, $status, $links, Client $client, SchoolClass $class)
     {
         $this->setTitle($title);
         $this->setDescription($description);
         $this->setCredentials($username, $password);
+        $this->setStatus($status);
         $this->setLinks($links);
         $this->client = $client;
         $this->class = $class;
@@ -54,6 +56,16 @@ class Project
             "username" => strip_tags($username),
             "password" => strip_tags($password)
         );
+    }
+
+    /**
+     * @param $status
+     */
+    public function setStatus($status)
+    {
+        $statuses = array('active', 'pending', 'maintenance', 'retired');
+        if(in_array($status, $statuses))
+            $this->status = $status;
     }
 
     /**
@@ -104,6 +116,14 @@ class Project
     public function getCredentials()
     {
         return $this->credentials;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**

@@ -43,7 +43,7 @@ final class Database
 
         // Add Project****************************************
         //Define the query
-        $sql = "INSERT INTO `projects`(`title`, `description`, `links`, `username`, `password`, `clientId`, `classId`)
+        $sql = "INSERT INTO `projects`(`title`, `description`, `status`, links`, `username`, `password`, `clientId`, `classId`)
                 VALUES (:title, :description, :links, :username, :password, :client, :class)";
 
         //Prepare the statement
@@ -52,6 +52,7 @@ final class Database
         //Bind the parameters
         $statement->bindParam(':title', $project->getTitle(), PDO::PARAM_STR);
         $statement->bindParam(':description', $project->getDescription(), PDO::PARAM_STR);
+        $statement->bindParam(':status', $project->getStatus(), PDO::PARAM_STR);
         $statement->bindParam(':links', implode(", ", $project->getLinks()), PDO::PARAM_STR);
         $statement->bindParam(':username', $project->getCredentials()['username'], PDO::PARAM_STR);
         $statement->bindParam(':password', $project->getCredentials()['password'], PDO::PARAM_STR);

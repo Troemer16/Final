@@ -53,13 +53,13 @@
                         <div class="row" >
                             <section class="col-6" >
                                     <label for="title">Title</label>
-                                    <input class="form-control" id="title" name="title" type="text" value=""><br>
+                                    <input class="form-control" id="title" name="title" type="text" value="{{ @title }}"><br>
                                     <label for="url">Project URL</label>
-                                    <input class="form-control" id="url" name="url" type="text" value=""><br>
+                                    <input class="form-control" id="url" name="url" type="text" value="{{ @url }}"><br>
                                     <label for="trello">Trello</label>
-                                    <input class="form-control" id="trello" name="trello" type="text" value=""><br>
+                                    <input class="form-control" id="trello" name="trello" type="text" value="{{ @trello }}"><br>
                                     <label for="github">Github</label>
-                                    <input class="form-control" id="github" name="github" type="text" value=""><br>
+                                    <input class="form-control" id="github" name="github" type="text" value="{{ @github }}"><br>
                             </section>
 
                             <section class="col-6">
@@ -69,23 +69,23 @@
                                 </section>
 
                                 <label for="username">Project Username</label>
-                                <input class="form-control" id="username" name="username" type="text" value=""><br>
+                                <input class="form-control" id="username" name="username" type="text" value="{{ @username }}"><br>
                                 <label for="password">Project Password</label>
-                                <input class="form-control" id="password" name="password" type="text" value=""><br>
+                                <input class="form-control" id="password" name="password" type="text" value="{{ @password }}"><br>
                             </section>
 
                             <div id="status" class="form-group btn-group">
                                 <label class="btn btn-success">
-                                    <input name="status" type="radio" autocomplete="off" value="active" > Active
+                                    <input name="status" type="radio" autocomplete="off" value="{{ @active }}" > Active
                                 </label>
                                 <label class="btn btn-primary">
-                                    <input name="status" type="radio" autocomplete="off" value="pending" > Pending
+                                    <input name="status" type="radio" autocomplete="off" value="{{ @pending }}" > Pending
                                 </label>
                                 <label class="btn btn-warning">
-                                    <input name="status" type="radio" autocomplete="off" value="maintenance" > Maintenance
+                                    <input name="status" type="radio" autocomplete="off" value="{{ @maintenance }}" > Maintenance
                                 </label>
                                 <label class="btn btn-danger">
-                                    <input name="status" type="radio" autocomplete="off" value="retired" > Retired
+                                    <input name="status" type="radio" autocomplete="off" value="{{ @retired }}" > Retired
                                 </label>
                             </div>
                         </div>
@@ -95,26 +95,58 @@
 
                     <div class="tab-pane fade" id="client">
                         <div class="row">
+                            <h3 class="col-4">Current Client?</h3>
+                            <select class="form-control col-7 dropdown" id="cClient" name="cClient" value="{{ @cClient }}">
+                                <option value="" selected="" disabled="disabled">-- Returning Client --</option>
+                                <option value="{{ @rClient }}">Petter</option>
+                                <option value="{{ @rClient }}">Sam</option>
+                                <option value="{{ @rClient }}">Jhon</option>
+                                <option value="{{ @rClient }}">Tyler</option>
+                            </select>
+                        </div>
+                        <hr>
+                        <div class="row">
                             <section id="company" class="col-6" >
                                 <h2>Company</h2>
                                 <label for="companyName">Name</label>
-                                <input class="form-control" id="companyName" name="companyName" type="text" value=""><br>
+                                <input class="form-control" id="companyName" name="companyName" type="text" value="{{ @companyName }}"><br>
                                 <label for="location">Location</label>
-                                <input class="form-control" id="location" name="location" type="text" value=""><br>
+                                <input class="form-control" id="location" name="location" type="text" value="{{ @location }}"><br>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <label for="zipCode">Zip</label>
+                                        <input class="form-control" id="zipCode" name="zipCode" type="text" value="{{ @zipCode }}">
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="city">City</label>
+                                        <input class="form-control" id="city" name="city" type="text" value="{{ @city }}">
+                                    </div>
+                                    <div class="col-3">
+                                        <label for="state">State</label>
+                                        <select class="form-control dropdown" id="state" name="state" value="{{ @state }}">
+                                            <option value="" selected="" disabled="disabled">-- state --</option>
+                                            <option value="WA">state</option>
+                                            <option value="OR">state</option>
+                                            <option value="ID">state</option>
+                                            <option value="CA">state</option>
+                                        </select>
+                                    </div>
+                                </div><br>
                                 <label for="siteUrl">Website</label>
-                                <input class="form-control" id="siteUrl" name="siteUrl" type="text" value=""><br>
+                                <input class="form-control" id="siteUrl" name="siteUrl" type="text" value="{{ @siteUrl }}"><br>
                             </section>
+
 
                             <section id="contact" class="col-6">
                                 <h2>Contact</h2>
                                 <label for="contactName">Name</label>
-                                <input class="form-control" id="contactName" name="contactName" type="text" value=""><br>
+                                <input class="form-control" id="contactName" name="contactName" type="text" value="{{ @contactName }}"><br>
                                 <label for="contactTitle">Title</label>
-                                <input class="form-control" id="contactTitle" name="contactTitle" type="text" value=""><br>
+                                <input class="form-control" id="contactTitle" name="contactTitle" type="text" value="{{ @contactTitle }}"><br>
                                 <label for="contactEmail">Email</label>
-                                <input class="form-control" id="contactEmail" name="contactEmail" type="text" value=""><br>
+                                <input class="form-control" id="contactEmail" name="contactEmail" type="text" value="{{ @contactEmail }}"><br>
                                 <label for="contactPhone">Phone</label>
-                                <input class="form-control" id="contactPhone" name="contactPhone" type="text" value=""><br>
+                                <input class="form-control" id="contactPhone" name="contactPhone" type="text" value="{{ @contactPhone }}"><br>
                             </section>
                         </div>
                     </div>
@@ -124,9 +156,9 @@
                         <div class="row">
                             <section class="col-6" >
                                 <label for="course">Class</label>
-                                <input class="form-control" id="course" name="course" type="text" value=""><br>
+                                <input class="form-control" id="course" name="course" type="text" value="{{ @course }}"><br>
                                 <label for="instructor">Instructor</label>
-                                <input class="form-control" id="instructor" name="instructor" type="text" value=""><br>
+                                <input class="form-control" id="instructor" name="instructor" type="text" value="{{ @instructor }}"><br>
                                 <label for="quarter">Quarter</label>
                                 <select class="form-control dropdown" id="quarter" name="quarter">
                                     <option value="" selected="" disabled="disabled">-- Select One --</option>
@@ -136,7 +168,7 @@
                                     <option value="winter">Winter</option>
                                 </select><br>
                                 <label for="year">Year</label>
-                                <input class="form-control" id="year" name="year" type="text" value=""><br>
+                                <input class="form-control" id="year" name="year" type="text" value="{{ @year }}"><br>
                             </section>
                             <section id="instructNotes" class="col-6">
                                 <h2>Instructor Notes</h2>
@@ -149,7 +181,7 @@
         </form>
 
         <div class="container">
-            <input class="btn btn-success" name = "submit" type="submit" id="submit" value="Create Guest">
+            <input class="btn btn-success" name="submit" type="submit" id="submit" value="Create Project">
         </div>
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

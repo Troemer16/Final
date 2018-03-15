@@ -1,4 +1,4 @@
-section#description, section#instructNotes{
+section#description.col-6{
     text-align: center;
 }
 textarea{
@@ -19,10 +19,4 @@ div.tab-pane{
 }
 div.row{
     margin: 0px;
-}
-#city, #state, #zipCode{
-    display: inline;
-}
-hr{
-    margin: 0.5em;
 }

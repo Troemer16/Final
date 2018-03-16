@@ -91,4 +91,13 @@ class SchoolClass
     {
         return $this->notes;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getYear()
+    {
+        return $this->year;
+    }
+
 }

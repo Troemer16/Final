@@ -11,9 +11,9 @@ class Client extends Contact
 
     public function __construct($company, $address, $zip, $city, $state, $url, $name, $title, $email, $phone)
     {
-        parent::__constuct($name, $title, $email, $phone);
+        parent::__construct($name, $title, $email, $phone);
         $this->setCompanyName($company);
-        $this->setLocation($address, $state, $city, $zip);
+        $this->setLocation($address, $zip, $city, $state);
         $this->setSiteURL($url);
     }
 
@@ -111,15 +111,15 @@ class Client extends Contact
         return $this->siteURL;
     }
 
-    public function printClient()
-    {
-        //$company, $location, $url, $name, $title, $email, $phone
-        echo "<p>$this->company</p>";
-        echo "<p>$this->location</p>";
-        echo "<p>$this->url</p>";
-        echo "<p>$this->name</p>";
-        echo "<p>$this->title</p>";
-        echo "<p>$this->email</p>";
-        echo "<p>$this->phone</p>";
-    }
+//    public function printClient()
+//    {
+//        //$company, $location, $url, $name, $title, $email, $phone
+//        echo "<p>$this->company</p>";
+//        echo "<p>$this->location</p>";
+//        echo "<p>$this->url</p>";
+//        echo "<p>$this->name</p>";
+//        echo "<p>$this->title</p>";
+//        echo "<p>$this->email</p>";
+//        echo "<p>$this->phone</p>";
+//    }
 }

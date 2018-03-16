@@ -21,8 +21,11 @@ div.row{
     margin: 0px;
 }
 #city, #state, #zipCode{
-    display: inline;
+    padding-left: 0em;
 }
 hr{
     margin: 0.5em;
+}
+select.form-control.dropdown{
+    -webkit-appearance: none;
 }

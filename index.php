@@ -54,8 +54,6 @@
                 $project = new Project($_POST['title'], $_POST['description'], $_POST['username'], $_POST['password'],
                     $_POST['status'], $_POST['url'].", ".$_POST['trello'].", ".$_POST['github'], $client, $class);
 
-                print_r($project);
-                return;
                 Database::addProject($project);
             }
             else

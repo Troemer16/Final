@@ -113,17 +113,17 @@
                                 <label for="address">Address</label>
                                 <input class="form-control" id="address" name="address" type="text" value="{{ @address }}"><br>
                                 <div class="row">
-                                    <div class="col-5">
+                                    <div class="col-5" id="zipCode">
                                         <label for="zipCode">Zip</label>
-                                        <input class="form-control" id="zipCode" name="zipCode" type="text" value="{{ @zipCode }}">
+                                        <input class="form-control" name="zipCode" type="text" value="{{ @zipCode }}">
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-4" id="city">
                                         <label for="city">City</label>
-                                        <input class="form-control" id="city" name="city" type="text" value="{{ @city }}">
+                                        <input class="form-control" name="city" type="text" value="{{ @city }}">
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-3" id="state">
                                         <label for="state">State</label>
-                                        <select class="form-control dropdown" id="state" name="state">
+                                        <select class="form-control dropdown" name="state">
                                             <option value="" selected disabled="disabled"></option>
                                             <repeat group="{{ @states }}" value="{{ @state }}">
                                                 <option value="{{ @state }}"

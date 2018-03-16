@@ -5,3 +5,15 @@
     border-width: thin;
     border-collapse: collapse;
 }
+#edit, #delete{
+    margin: 0em 0.5em;
+}
+h4{
+    margin-left: 0.5em;
+    margin-bottom: 0em;
+    margin-right: 0.1em;
+    padding-top: 0.2em;
+}
+.btn {
+    border-radius: 1em;
+}

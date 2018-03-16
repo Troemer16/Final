@@ -14,7 +14,14 @@
         <!-- JQuery UI CSS -->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+        <!-- Magnific Popup core CSS file -->
+        <link rel="stylesheet" href="vendor/popup/magnific-popup.css">
+
+        <!-- Awesome Fonts CSS -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
         <link rel="stylesheet" href="styles/viewProjects.css">
+        <link rel="stylesheet" href="styles/portfolio.css">
 
         <title>Project Directory</title>
 
@@ -66,7 +73,7 @@
 
             <tbody>
             <repeat group="{{ @projects }}" value="{{ @project }}">
-                <tr id="{{ @project['projectID'] }}" class="viewProject">
+                <tr id="{{ @project['projectID'] }}">
                     <td>{{ @project['description'] }}</td>
                     <td>{{ @project['title'] }}</td>
                     <td>{{ @project['companyName'] }}</td>
@@ -80,8 +87,29 @@
     </div>
 
 
-    <div id="dialog" title="Basic dialog">
-        <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+    <div class="portfolio-modal mfp-hide" id="getProject">
+        <div class="portfolio-modal-dialog bg-white">
+            <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
+                <i class="fa fa-3x fa-times"></i>
+            </a>
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h2 class="text-secondary text-uppercase mb-0">St.James Outreach Website</h2>
+                        <hr class="star-dark mb-5">
+                        <a href="http://teamevergreen.greenrivertech.net/currentGuests.php"><img class="img-fluid mb-5" src="" alt="URL Preview"></a>
+                        <p class="mb-5">Created a website for St.James Outreach where volunteers can store guest information which could then
+                            be pulled up and/or editted at a later time. This website is also used to record what type, when, and the amount of help
+                            that was given to a specific guest as well as provide an overview of help given of a selected date range. This website
+                            was create by a group of 4 developers in a Agile format with 2 week sprints.</p>
+                        <a class="btn btn-primary btn-lg rounded-pill portfolio-modal-dismiss" href="#">
+                            <i class="fa fa-close"></i>
+                            Close Project
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -92,17 +120,30 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
 
+    <!-- Magnific Popup core JS file -->
+    <script src="vendor/popup/jquery.magnific-popup.js"></script>
+
     <script>
         var table = $('#pro-data').DataTable();
         table.column( 0 ).visible( false );
 
-        $("#dialog").dialog({
-            autoOpen: false
-        });
+        (function($) {
+            "use strict"; // Start of use strict
+            // Modal popup$(function () {
+            // From an element with ID #popup
+            $('tbody').magnificPopup({
+                items: {
+                    src: '#getProject',
+                    type: 'inline'
+                }
+            });
 
-        $(".viewProject").on('click', function() {
-            $("#dialog").dialog('open');
-        });
+            $(document).on('click', '.portfolio-modal-dismiss', function(e) {
+                e.preventDefault();
+                $.magnificPopup.close();
+            });
+        })(jQuery);
+
     </script>
     </body>
 </html>

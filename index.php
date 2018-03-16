@@ -35,7 +35,7 @@
     });
 
     $f3->route('GET|POST /create', function($f3) {
-        $valid = false;
+        $valid = true;
 
         if(isset($_POST['submit']))
         {

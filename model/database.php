@@ -65,6 +65,25 @@ final class Database
         return $result;
     }
 
+    public static function getClients()
+    {
+        self::initialize();
+
+        //Define the query
+        $sql = "SELECT clientId, companyName FROM clients";
+
+        //Prepare the statement
+        $statement = self::$dbh->prepare($sql);
+
+        //Execute the statement
+        $statement->execute();
+
+        //Process the result
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return $result;
+    }
+
     public static function addProject($project)
     {
         self::initialize();

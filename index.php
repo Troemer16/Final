@@ -31,8 +31,9 @@
 
         if(!empty($_POST)){
             //if time permits come back and use json encode/decode
-            $project = Database::getProject($_POST['id']);
-            echo $project['title'].'<@>'.$project['description'].'<@>'.$project['status'];
+            $result = Database::getProject($_POST['id']);
+            $project = array($result['title'], $result['description'], $result['status']);
+            echo json_encode($project);
             return;
         }
 
@@ -42,6 +43,9 @@
     });
 
     $f3->route('GET|POST /create', function($f3) {
+        $clients = Database::getClients();
+        $f3->set('clients', $clients);
+
         $valid = true;
 
         if(isset($_POST['submit']))
@@ -66,6 +70,7 @@
             else
             {
                 //set Fat-Free Hive
+                $f3->set('curClient', $_POST['cClient']);
                 $f3->set('companyName', $_POST['companyName']);
                 $f3->set('address', $_POST['address']);
                 $f3->set('zipCode', $_POST['zipCode']);

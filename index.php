@@ -25,9 +25,16 @@
     $f3->set('quarters', array('spring', 'summer', 'fall', 'winter'));
 
     //Define a default route
-    $f3->route('GET /', function($f3) {
+    $f3->route('GET|POST /', function($f3) {
         $projects = Database::getProjects();
         $f3->set('projects', $projects);
+
+        if(!empty($_POST)){
+            //if time permits come back and use json encode/decode
+            $project = Database::getProject($_POST['id']);
+            echo $project['title'].'<@>'.$project['description'].'<@>'.$project['status'];
+            return;
+        }
 
         //load a template
         $template = new Template();

@@ -74,7 +74,7 @@
 
             <tbody>
             <repeat group="{{ @projects }}" value="{{ @project }}">
-                <tr id="{{ @project['projectID'] }}">
+                <tr id="{{ @project['projectId'] }}">
                     <td>{{ @project['description'] }}</td>
                     <td>{{ @project['title'] }}</td>
                     <td>{{ @project['companyName'] }}</td>
@@ -88,6 +88,7 @@
     </div>
 
 
+    <!-- Project Popup Html -->
     <div class="portfolio-modal mfp-hide" id="getProject">
         <div class="portfolio-modal-dialog bg-white">
             <a class="close-button d-none d-md-block portfolio-modal-dismiss" href="#">
@@ -96,13 +97,10 @@
             <div class="container text-center">
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
-                        <h2 class="text-secondary text-uppercase mb-0">St.James Outreach Website</h2>
+                        <h2 id="projectTitle" class="text-secondary text-uppercase mb-0"></h2>
                         <hr class="star-dark mb-5">
                         <a href="http://teamevergreen.greenrivertech.net/currentGuests.php"><img class="img-fluid mb-5" src="" alt="URL Preview"></a>
-                        <p class="mb-5">Created a website for St.James Outreach where volunteers can store guest information which could then
-                            be pulled up and/or editted at a later time. This website is also used to record what type, when, and the amount of help
-                            that was given to a specific guest as well as provide an overview of help given of a selected date range. This website
-                            was create by a group of 4 developers in a Agile format with 2 week sprints.</p>
+                        <p id="projectDescript" class="mb-5"></p>
                         <div id="status" class="form-group btn-group">
                             <button class="btn btn-success" id="edit">Edit</button>
                             <button class="btn btn-danger" id="delete">Delete</button>
@@ -126,6 +124,8 @@
         </div>
     </div>
 
+
+    <!-- Log In dialog popup Html -->
     <div id="dialog" title="Log In">
         <form method="post" action="loginProc.php">
             <input type="text" id="username" name="username" placeholder="Username" <?php if(!$_SESSION['login']) { echo 'value="'.$_SESSION['username'].'"'; } ?> required><br><br>
@@ -145,35 +145,7 @@
     <!-- Magnific Popup core JS file -->
     <script src="vendor/popup/jquery.magnific-popup.js"></script>
 
-    <script>
-        var table = $('#pro-data').DataTable();
-        table.column( 0 ).visible( false );
-
-        (function($) {
-            "use strict"; // Start of use strict
-            // Modal popup$(function () {
-            // From an element with ID #popup
-            $('tbody').magnificPopup({
-                items: {
-                    src: '#getProject',
-                    type: 'inline'
-                }
-            });
-
-            $(document).on('click', '.portfolio-modal-dismiss', function(e) {
-                e.preventDefault();
-                $.magnificPopup.close();
-            });
-        })(jQuery);
-
-        $("#dialog").dialog({
-            autoOpen: false
-        });
-
-        $("#login").on('click', function() {
-            $("#dialog").dialog('open');
-        });
-
-    </script>
+    <!-- Custom Javascript for View Projects page -->
+    <script src="js/viewProjects.js"></script>
     </body>
 </html>

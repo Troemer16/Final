@@ -16,13 +16,14 @@ $(document).on('click', '#projects tr', function () {
                 if ($(this).val() == project.status)
                     $(this).prop("checked", true);
             });
-            $('#companyName').append(project.companyName);
-            $('#address').append(project.address + " " + project.zipcode + " " + project.city + ", " + project.state);
+            $('#companyName').html("Name: " + project.companyName);
+            $('#address').html("Address: " + project.address + " " + project.zipcode + " " + project.city + ", " + project.state);
             $('#siteUrl').attr("href", project.siteURL);
-            $('#contactName').append(project.contactName[0]);
-            $('#contactTitle').append(project.contactTitle[0]);
-            $('#contactEmail').append(project.email[0]);
-            $('#contactPhone').append(project.phone[0]);
+            $('#contactName').html("Name: " + project.contactName[0]);
+            $('#contactTitle').html("Title: " + project.contactTitle[0]);
+            $('#contactEmail').html("Email: " + project.email[0]);
+            $('#contactPhone').html("Phone: " + project.phone[0]);
+            $('#classes').empty();
             for(var i = 0; i < project.class.length; i++)
             {
                 $('#classes').append('<tr>' +

@@ -101,6 +101,58 @@
                         <hr class="star-dark mb-5">
                         <a href="http://teamevergreen.greenrivertech.net/currentGuests.php"><img class="img-fluid mb-5" src="" alt="URL Preview"></a>
                         <p id="projectDescript" class="mb-5"></p>
+                        <div class="row">
+                            <section id="company" class="col-3" >
+                                <h2>Client</h2>
+                                <label for="companyName">Name</label>
+                                <input class="form-control" id="companyName" name="companyName" type="text" value="{{ @companyName }}"><br>
+                                <label for="address">Address</label>
+                                <input class="form-control" id="address" name="address" type="text" value="{{ @address }}"><br>
+                                <label for="siteUrl">Website</label>
+                                <input class="form-control" id="siteUrl" name="siteUrl" type="text" value="{{ @siteUrl }}"><br>
+                            </section>
+
+
+                            <section id="contact" class="col-3">
+                                <h2>Contact</h2>
+                                <label for="contactName">Name</label>
+                                <input class="form-control" id="contactName" name="contactName" type="text" value="{{ @contactName }}"><br>
+                                <label for="contactTitle">Title</label>
+                                <input class="form-control" id="contactTitle" name="contactTitle" type="text" value="{{ @contactTitle }}"><br>
+                                <label for="contactEmail">Email</label>
+                                <input class="form-control" id="contactEmail" name="contactEmail" type="text" value="{{ @contactEmail }}"><br>
+                                <label for="contactPhone">Phone</label>
+                                <input class="form-control" id="contactPhone" name="contactPhone" type="text" value="{{ @contactPhone }}"><br>
+                            </section>
+
+                            <section class="col-6">
+                            <table id="client-data" class="display" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Instruct</th>
+                                    <th>Quarter</th>
+                                    <th>year</th>
+                                    <th>Notes</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <repeat group="{{ @projects }}" value="{{ @project }}">
+                                    <tr id="{{ @project['clientId'] }}">
+                                        <td>{{ @project['name'] }}</td>
+                                        <td>{{ @project['Instruct'] }}</td>
+                                        <td>{{ @project['Quarter'] }}</td>
+                                        <td>{{ @project['year'] }}</td>
+                                        <td>{{ @project['Notes'] }}</td>
+                                    </tr>
+                                </repeat>
+
+                                </tbody>
+                            </table>
+                            </section>
+                        </div>
+
                         <div id="status" class="form-group btn-group">
                             <button class="btn btn-success" id="edit">Edit</button>
                             <button class="btn btn-danger" id="delete">Delete</button>

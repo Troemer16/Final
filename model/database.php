@@ -46,8 +46,41 @@ final class Database
     {
         self::initialize();
 
+        $project = array(
+            'title' => "",
+            'description' => "",
+            'links' => array(),
+            'status' => "",
+            'companyName' => "",
+            'address' => "",
+            'zipcode' => "",
+            'city' => "",
+            'state' => "",
+            'siteURL' => "",
+            'contactName' => array(),
+            'contactTitle' => array(),
+            'email' => array(),
+            'phone' => array(),
+            'class' => array(),
+            'instructor' => array(),
+            'quarter' => array(),
+            'year' => array(),
+            'notes' => array()
+        );
+
+        /*
+         * SELECT projects.title, description, links, status, companyName, address, zipcode, city, state,
+                siteURL, contacts.name as contactName, contacts.title as contactTitle, email,
+                phone, classes.name as class, instructor, quarter, year, notes
+                FROM projects, clients, contacts, classes, ProjectsClasses
+                WHERE projects.projectId = 1 AND clients.clientId = projects.clientId
+                AND contacts.clientId = clients.clientId AND ProjectsClasses.projectId = 1
+                AND ProjectsClasses.classId = classes.classId
+         */
+
+        //Get Project details
         //Define the query
-        $sql = "SELECT title, description, links, status FROM projects
+        $sql = "SELECT title, description, links, status, clientId FROM projects
                 WHERE projectId = :id";
 
         //Prepare the statement
@@ -62,7 +95,93 @@ final class Database
         //Process the result
         $result = $statement->fetch();
 
-        return $result;
+        //Add results to array
+        $project['title'] = $result['title'];
+        $project['description'] = $result['description'];
+        $project['links'] = explode(', ', $result['links']);
+        $project['status'] = $result['status'];
+        $clientId = $result['clientId'];
+
+
+        //Get client details
+        //Define the query
+        $sql = "SELECT companyName, address, zipcode, city, state, siteURL FROM clients
+                WHERE clientId = :id";
+
+        //Prepare the statement
+        $statement = self::$dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':id', $clientId, PDO::PARAM_STR);
+
+        //Execute the statement
+        $statement->execute();
+
+        //Process the result
+        $result = $statement->fetch();
+
+        //Add results to array
+        $project['companyName'] = $result['companyName'];
+        $project['address'] = $result['address'];
+        $project['zipcode'] = $result['zipcode'];
+        $project['city'] = $result['city'];
+        $project['state'] = $result['state'];
+        $project['siteURL'] = $result['siteURL'];
+
+
+        //Get contacts
+        //Define the query
+        $sql = "SELECT contacts.name as contactName, contacts.title as contactTitle, email, phone FROM contacts
+                WHERE clientId = :id";
+
+        //Prepare the statement
+        $statement = self::$dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':id', $clientId, PDO::PARAM_STR);
+
+        //Execute the statement
+        $statement->execute();
+
+        //Process the result
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        //Add results to array
+        foreach ($result as $row){
+            array_push($project['contactName'], $row['contactName']);
+            array_push($project['contactTitle'], $row['contactTitle']);
+            array_push($project['email'], $row['email']);
+            array_push($project['phone'], $row['phone']);
+        }
+
+
+        //Get classes
+        //Define the query
+        $sql = "SELECT classes.name as class, instructor, quarter, year, notes FROM classes, ProjectsClasses
+                WHERE projectId = :id AND classes.classId = ProjectsClasses.classId";
+
+        //Prepare the statement
+        $statement = self::$dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':id', $id, PDO::PARAM_STR);
+
+        //Execute the statement
+        $statement->execute();
+
+        //Process the result
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        //Add results to array
+        foreach ($result as $row){
+            array_push($project['class'], $row['class']);
+            array_push($project['instructor'], $row['instructor']);
+            array_push($project['quarter'], $row['quarter']);
+            array_push($project['year'], $row['year']);
+            array_push($project['notes'], $row['notes']);
+        }
+
+        return $project;
     }
 
     public static function getClients()
@@ -159,6 +278,7 @@ final class Database
 
         return self::$dbh->lastInsertId();
     }
+
     public static function addContact($client, $clientId)
     {
         //Define the query
@@ -178,6 +298,7 @@ final class Database
         //Execute
         $statement->execute();
     }
+
     public static function addClass($class)
     {
         //Define the query

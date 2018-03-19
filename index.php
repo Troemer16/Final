@@ -32,8 +32,7 @@
         if(!empty($_POST)){
             //if time permits come back and use json encode/decode
             $result = Database::getProject($_POST['id']);
-            $project = array($result['title'], $result['description'], $result['status']);
-            echo json_encode($project);
+            echo json_encode($result);
             return;
         }
 
@@ -105,7 +104,7 @@
     $f3->route('GET /edit', function() {
         //load a template
         $template = new Template();
-        echo $template->render('views/createProject.html');
+        echo $template->render('views/editProject.html');
     });
 
     //Run Fat-Free

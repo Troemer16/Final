@@ -71,18 +71,26 @@ $("#projects tr a").click(function(e) {
 $(document).on('click', '#projects tr', function () {
     var id = $(this).attr('id');
     var link = $(location).attr('href');
+    $('#status label').hide();
     $.ajax({
         type: "POST",
         url: link,
         data: { id: id },
         success: function (data) {
             var project = data;
+            var header = project.title + " - ";
+            if(project.links[2] !== null && project.links[2] !== "" && project.links[2] !== undefined)
+                header += "<a href='"+project.links[2]+"'><i class='fab fa-github-square'></i></a>";
+            if(project.links[1] !== null && project.links[1] !== "" && project.links[1] !== undefined)
+                header += "<a href='"+project.links[1]+"'><i class='fab fa-trello'></i></a>";
+            header += "<a href='"+project.links[0]+"'><i class='fab fa-edge'></i></a>";
+
             $('button#edit').val(id);
-            $('#projectTitle').html(project.title);
+            $('#projectTitle').html(header);
             $('#projectDescript').html(project.description);
-            $('#status input').each(function () {
-                if ($(this).val() == project.status)
-                    $(this).prop("checked", true);
+            $('#status label').each(function () {
+                if ($(this).attr('value') == project.status)
+                    $(this).show();
             });
             $('#companyName').html("Name: " + project.companyName);
             $('#address').html("Address: " + project.address + " " + project.zipcode + " " + project.city + ", " + project.state);

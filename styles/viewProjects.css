@@ -7,6 +7,7 @@
 }
 #edit, #delete{
     margin: 0em 0.5em;
+    border-radius: 1em;
 }
 h4{
     margin-left: 0.5em;
@@ -14,6 +15,6 @@ h4{
     margin-right: 0.1em;
     padding-top: 0.2em;
 }
-.btn {
-    border-radius: 1em;
+#status label{
+    margin: 0.5em;
 }

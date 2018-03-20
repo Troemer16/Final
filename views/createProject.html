@@ -96,18 +96,6 @@
 
                     <div class="tab-pane fade" id="client">
                         <div class="row">
-                            <h3 class="col-4">Current Client?</h3>
-                            <select class="form-control col-7 dropdown" id="cClient" name="cClient" value="{{ @cClient }}">
-                                <option value="0" selected="">-- New Client --</option>
-                                <repeat group="{{ @clients }}" value="{{ @client }}">
-                                    <option value="{{ @client['clientId'] }}"
-                                    <check if="@curClient == @client['clientId']">selected</check>>
-                                    {{ @client['companyName'] }}</option>
-                                </repeat>
-                            </select>
-                        </div>
-                        <hr>
-                        <div class="row">
                             <section id="company" class="col-6" >
                                 <h2>Company</h2>
                                 <label for="companyName">Name</label>

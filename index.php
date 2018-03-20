@@ -27,7 +27,8 @@
     //Define a default route
     $f3->route('GET|POST /', function($f3) {
         $projects = Database::getProjects();
-        $projects['links'] = explode(', ', $projects['links']);
+        foreach ($projects as &$project)
+            $project['links'] = explode(', ', $project['links']);
         $f3->set('projects', $projects);
 
         if(!empty($_POST)){
@@ -102,8 +103,29 @@
         echo $template->render('views/createProject.html');
     });
 
-    $f3->route('GET /edit/@id', function($f3, $params) {
+    $f3->route('GET|POST /edit/@id', function($f3, $params) {
+
         $project = Database::getProject($params['id']);
+
+        if(isset($_POST['submit']))
+        {
+            //create client
+            $client = new Client($_POST['companyName'], $_POST['address'], $_POST['zipCode'],
+                $_POST['city'], $_POST['state'], $_POST['siteUrl'], $_POST['contactName'],
+                $_POST['contactTitle'], $_POST['contactEmail'], $_POST['contactPhone']);
+
+            //create class
+            $class = new SchoolClass($_POST['course'], $_POST['instructor'], $_POST['quarter'],
+                $_POST['year'], $_POST['instructNotes']);
+
+            //create object
+            $newProject = new Project($_POST['title'], $_POST['description'], $_POST['username'], $_POST['password'],
+                $_POST['status'], $_POST['url'].", ".$_POST['trello'].", ".$_POST['github'], $client, $class);
+
+            Database::updateProject($newProject, $params['id'], $project['clientId']);
+            $f3->reroute('../');
+        }
+
 
         $classes = array();
         for($i = 0; $i < sizeof($project['class']); $i++)

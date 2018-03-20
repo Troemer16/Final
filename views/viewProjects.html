@@ -76,9 +76,9 @@
                     <td>{{ @project['title'] }}</td>
                     <td>{{ @project['companyName'] }}</td>
                     <td>
-                        <a href="{{ @project['links'] }}"><i class="fab fa-github-square"></i></a>
-                        <a href="{{ @project['links'] }}"><i class="fab fa-trello"></i></a>
-                        <a href="{{ @project['links'] }}"><i class="fab fa-edge"></i></a>
+                        <a href="{{ @project['links'][2] }}"><i class="fab fa-github-square"></i></a>
+                        <a href="{{ @project['links'][1] }}"><i class="fab fa-trello"></i></a>
+                        <a href="{{ @project['links'][0] }}"><i class="fab fa-edge"></i></a>
                     </td>
                     <td>{{ @project['status'] }}</td>
                 </tr>
@@ -137,8 +137,8 @@
                         </div>
 
                         <div id="status" class="form-group btn-group">
-                            <a href="edit" class="btn btn-success" id="edit">Edit</a>
-                            <a href="#" class="btn btn-danger" id="delete">Delete</a>
+                            <button class="btn btn-success" id="edit">Edit</button>
+                            <button class="btn btn-danger" id="delete">Delete</button>
                             <h4>Status:</h4>
                             <label class="btn btn-success">
                                 <input name="status" type="radio" autocomplete="off" value="active"> A

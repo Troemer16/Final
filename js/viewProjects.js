@@ -1,7 +1,13 @@
 var table = $('#pro-data').DataTable();
 table.column( 0 ).visible( false );
 
+$(document).on('click', '#edit', function () {
+    window.location.href = "http://troemer.greenriverdev.com/328/Final/edit/" + $(this).val();
+});
 
+$("#projects tr a").click(function(e) {
+    e.stopPropagation();
+});
 
 $(document).on('click', '#projects tr', function () {
     var id = $(this).attr('id');
@@ -12,6 +18,7 @@ $(document).on('click', '#projects tr', function () {
         data: { id: id },
         success: function (data) {
             var project = data;
+            $('button#edit').val(id);
             $('#projectTitle').html(project.title);
             $('#projectDescript').html(project.description);
             $('#status input').each(function () {

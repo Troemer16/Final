@@ -306,6 +306,9 @@ final class Database
 
     public static function addClass($class)
     {
+        if(strlen($class->getName()) <= 0 AND strlen($class->getInstructor()) <=0)
+            return;
+
         //Define the query
         $sql = "INSERT INTO `classes`(`name`, `instructor`, `quarter`, `year`, `notes`) 
                 VALUES (:name, :instructor, :quarter, :year, :notes)";
@@ -324,5 +327,107 @@ final class Database
         $statement->execute();
 
         return self::$dbh->lastInsertId();
+    }
+
+    public static function updateProject($project, $id, $client)
+    {
+        self::initialize();
+
+        //Update Project****************************************
+        //Define the query
+        $sql = "UPDATE `projects` SET 
+                `title` =  :title,
+                `description` =  :description,
+                `status` = :status,
+                `links` = :links,
+                `username` = :username,
+                `password` = :password
+                WHERE projectId = :id";
+
+        //Prepare the statement
+        $statement = self::$dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':title', $project->getTitle(), PDO::PARAM_STR);
+        $statement->bindParam(':description', $project->getDescription(), PDO::PARAM_STR);
+        $statement->bindParam(':status', $project->getStatus(), PDO::PARAM_STR);
+        $statement->bindParam(':links', $project->getLinks(), PDO::PARAM_STR);
+        $statement->bindParam(':username', $project->getCredentials()['username'], PDO::PARAM_STR);
+        $statement->bindParam(':password', $project->getCredentials()['password'], PDO::PARAM_STR);
+        $statement->bindParam(':id', $id, PDO::PARAM_STR);
+
+        //Execute
+        $statement->execute();
+
+        //Update Client*****************************************
+        //Define the query
+        $sql = "UPDATE `clients` SET
+                `companyName` = :name,
+                `address` = :address,
+                `zipcode` = :zipcode,
+                `city` = :city,
+                `state` = :state,
+                `siteURL` = :url
+                WHERE clientId = :id";
+
+        //Prepare the statement
+        $statement = self::$dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':name', $project->getClient()->getCompanyName(), PDO::PARAM_STR);
+        $statement->bindParam(':address', $project->getClient()->getAddress(), PDO::PARAM_STR);
+        $statement->bindParam(':zipcode', $project->getClient()->getZip(), PDO::PARAM_STR);
+        $statement->bindParam(':city', $project->getClient()->getCity(), PDO::PARAM_STR);
+        $statement->bindParam(':state', $project->getClient()->getState(), PDO::PARAM_STR);
+        $statement->bindParam(':url', $project->getClient()->getSiteURL(), PDO::PARAM_STR);
+        $statement->bindParam(':id', $client, PDO::PARAM_STR);
+
+        //Execute
+        $statement->execute();
+        if(!$statement->rowCount())
+            self::addClient($project->getClient());
+
+
+        //Update Contact************************************
+        //Define the query
+        $sql = "UPDATE `contacts` SET
+               `name` = :name,
+               `title` = :title,
+               `email` = :email,
+               `phone` = :phone
+                WHERE clientId = :client";
+
+        //Prepare the statement
+        $statement = self::$dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':name', $project->getClient()->getName(), PDO::PARAM_STR);
+        $statement->bindParam(':title', $project->getClient()->getTitle(), PDO::PARAM_STR);
+        $statement->bindParam(':email', $project->getClient()->getEmail(), PDO::PARAM_STR);
+        $statement->bindParam(':phone', $project->getClient()->getPhone(), PDO::PARAM_STR);
+        $statement->bindParam(':client', $client, PDO::PARAM_STR);
+
+        //Execute
+        $statement->execute();
+        if(!$statement->rowCount())
+            self::addContact($project->getClient(), $client);
+
+
+        //Add Class******************************************
+        $class = self::addClass($project->getClass());
+
+        //Add Class & Project to junction table ********************************
+        //Define the query
+        $sql = "INSERT INTO `ProjectsClasses`(`projectId`, `classId`) VALUES (:project, :class)";
+
+        //Prepare the statement
+        $statement = self::$dbh->prepare($sql);
+
+        //Bind the parameters
+        $statement->bindParam(':project', $id, PDO::PARAM_STR);
+        $statement->bindParam(':class', $class, PDO::PARAM_STR);
+
+        //Execute
+        $statement->execute();
     }
 }

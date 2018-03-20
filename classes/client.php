@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Client
+ *
+ * This class represents a client on a web dev portal
+ * and keeps track of the information that they
+ * will provide, such as companyName, address, zip, city, state, siteUrl
+ * @author Pavel Radchuk <pradchuk@greenriver.edu>
+ * @author Tyler Roemer <troemer@greenriver.edu>
+ * @copyright 2018
+ */
 class Client extends Contact
 {
     private $companyName;
@@ -9,6 +19,19 @@ class Client extends Contact
     private $state;
     private $siteURL;
 
+    /**
+     * Contact constructor.
+     * @param $company name
+     * @param $address address
+     * @param $zip zip
+     * @param $city city
+     * @param $state state
+     * @param $url url
+     * @param $name name
+     * @param $title title
+     * @param $email email
+     * @param $phone phone
+     */
     public function __construct($company, $address, $zip, $city, $state, $url, $name, $title, $email, $phone)
     {
         parent::__construct($name, $title, $email, $phone);
@@ -18,6 +41,7 @@ class Client extends Contact
     }
 
     /**
+     * set the company name
      * @param mixed $companyName
      */
     public function setCompanyName($companyName)
@@ -26,6 +50,7 @@ class Client extends Contact
     }
 
     /**
+     * set the company location
      * @param mixed $address
      * @param mixed $zip
      * @param mixed $city
@@ -54,7 +79,8 @@ class Client extends Contact
     }
 
     /**
-     * @param mixed $siteURL
+     * set the company siteUrl
+     * @param $siteURL siteUrl
      */
     public function setSiteURL($siteURL)
     {
@@ -64,7 +90,8 @@ class Client extends Contact
 
 
     /**
-     * @return mixed
+     * get the company Name
+     * @return string companyName
      */
     public function getCompanyName()
     {
@@ -72,7 +99,8 @@ class Client extends Contact
     }
 
     /**
-     * @return mixed
+     * get the company Address
+     * @return string address
      */
     public function getAddress()
     {
@@ -80,7 +108,8 @@ class Client extends Contact
     }
 
     /**
-     * @return mixed
+     * get the company zip
+     * @return string zip
      */
     public function getZip()
     {
@@ -88,7 +117,8 @@ class Client extends Contact
     }
 
     /**
-     * @return mixed
+     * get the company City
+     * @return string city
      */
     public function getCity()
     {
@@ -96,7 +126,8 @@ class Client extends Contact
     }
 
     /**
-     * @return mixed
+     * get the company State
+     * @return string state
      */
     public function getState()
     {
@@ -104,22 +135,11 @@ class Client extends Contact
     }
 
     /**
-     * @return mixed
+     * get the company SiteUrl
+     * @return string siteUrl
      */
     public function getSiteURL()
     {
         return $this->siteURL;
     }
-
-//    public function printClient()
-//    {
-//        //$company, $location, $url, $name, $title, $email, $phone
-//        echo "<p>$this->company</p>";
-//        echo "<p>$this->location</p>";
-//        echo "<p>$this->url</p>";
-//        echo "<p>$this->name</p>";
-//        echo "<p>$this->title</p>";
-//        echo "<p>$this->email</p>";
-//        echo "<p>$this->phone</p>";
-//    }
 }

@@ -1,5 +1,16 @@
 <?php
 
+/**
+ * Project
+ *
+ * This class represents a project on a web dev portal
+ * and keeps track of the information that they
+ * will provide, such as title, description, credentials,
+ * status, links, client, class
+ * @author Pavel Radchuk <pradchuk@greenriver.edu>
+ * @author Tyler Roemer <troemer@greenriver.edu>
+ * @copyright 2018
+ */
 class Project
 {
     private $title;
@@ -10,6 +21,16 @@ class Project
     private $client;
     private $class;
 
+    /**
+     * Project constructor.
+     * @param $title title
+     * @param $description description
+     * @param $password password
+     * @param $status status
+     * @param $links links
+     * @param $client Client
+     * @param $class SchoolClass
+     */
     function __construct($title, $description, $username, $password, $status, $links, Client $client, SchoolClass $class)
     {
         $this->setTitle($title);
@@ -22,7 +43,8 @@ class Project
     }
 
     /**
-     * @param mixed $title
+     * set the Project title
+     * @param $title titile
      */
     public function setTitle($title)
     {
@@ -30,7 +52,8 @@ class Project
     }
 
     /**
-     * @param mixed $description
+     * set the Project description
+     * @param $description description
      */
     public function setDescription($description)
     {
@@ -38,7 +61,8 @@ class Project
     }
 
     /**
-     * @param mixed $links
+     * set the Project links
+     * @param $links links
      */
     public function setLinks($links)
     {
@@ -47,8 +71,9 @@ class Project
     }
 
     /**
-     * @param $username
-     * @param $password
+     * set the Project credentials
+     * @param $username username
+     * @param $password password
      */
     public function setCredentials($username, $password)
     {
@@ -59,7 +84,8 @@ class Project
     }
 
     /**
-     * @param $status
+     * set the Project status
+     * @param $status status
      */
     public function setStatus($status)
     {
@@ -69,7 +95,8 @@ class Project
     }
 
     /**
-     * @param Client $client
+     * set the Project client
+     * @param $client client
      */
     public function setClient($client)
     {
@@ -77,7 +104,8 @@ class Project
     }
 
     /**
-     * @param SchoolClass $class
+     * set the Project class
+     * @param $class class
      */
     public function setClass($class)
     {
@@ -87,7 +115,8 @@ class Project
 
 
     /**
-     * @return mixed
+     * get the Project title
+     * @return string Title
      */
     public function getTitle()
     {
@@ -95,7 +124,8 @@ class Project
     }
 
     /**
-     * @return mixed
+     * get the Project description
+     * @return string Description
      */
     public function getDescription()
     {
@@ -103,7 +133,8 @@ class Project
     }
 
     /**
-     * @return mixed
+     * get the Project links
+     * @return string Links
      */
     public function getLinks()
     {
@@ -111,7 +142,8 @@ class Project
     }
 
     /**
-     * @return mixed
+     * get the Project credentials
+     * @return string Credentials
      */
     public function getCredentials()
     {
@@ -119,7 +151,8 @@ class Project
     }
 
     /**
-     * @return mixed
+     * get the Project status
+     * @return string Status
      */
     public function getStatus()
     {
@@ -127,7 +160,8 @@ class Project
     }
 
     /**
-     * @return Client
+     * get the Project client
+     * @return string Client
      */
     public function getClient()
     {
@@ -135,19 +169,11 @@ class Project
     }
 
     /**
-     * @return SchoolClass
+     * get the Project class
+     * @return string Class
      */
     public function getClass()
     {
         return $this->class;
     }
-
-//    public function printProject()
-//    {
-//        echo "<p>$this->title</p>";
-//        echo "<p>$this->description</p>";
-//        echo "<p>$this->links</p>";
-//        $this->client->printClient();
-//        $this->class->printClass();
-//    }
 }

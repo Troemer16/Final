@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * SchoolClass
+ *
+ * This class represents a schoolClass on a web dev portal
+ * and keeps track of the information that they
+ * will provide, such as name, instructor, quarter, year, notes
+ * @author Pavel Radchuk <pradchuk@greenriver.edu>
+ * @author Tyler Roemer <troemer@greenriver.edu>
+ * @copyright 2018
+ */
 class SchoolClass
 {
     private $name;
@@ -8,6 +18,14 @@ class SchoolClass
     private $year;
     private $notes;
 
+    /**
+     * SchoolClass constructor.
+     * @param $name name
+     * @param $instructor instructor
+     * @param $quarter quarter
+     * @param $year year
+     * @param $notes notes
+     */
     public function __construct($name, $instructor, $quarter, $year, $notes)
     {
         $this->setName($name);
@@ -18,6 +36,7 @@ class SchoolClass
     }
 
     /**
+     * set SchoolClass name
      * @param mixed $name
      */
     public function setName($name)
@@ -26,7 +45,8 @@ class SchoolClass
     }
 
     /**
-     * @param mixed $instructor
+     * set SchoolClass instructor
+     * @param $instructor instructor
      */
     public function setInstructor($instructor)
     {
@@ -34,7 +54,8 @@ class SchoolClass
     }
 
     /**
-     * @param mixed $quarter
+     * set SchoolClass quarter
+     * @param $quarter quarter
      */
     public function setQuarter($quarter)
     {
@@ -44,6 +65,7 @@ class SchoolClass
     }
 
     /**
+     * set SchoolClass year
      * @param int year
      */
     public function setYear($year)
@@ -53,6 +75,7 @@ class SchoolClass
     }
 
     /**
+     * set SchoolClass notes
      * @param mixed $notes
      */
     public function setNotes($notes)
@@ -61,7 +84,8 @@ class SchoolClass
     }
 
     /**
-     * @return mixed
+     * get the SchoolClass name
+     * @return string name
      */
     public function getName()
     {
@@ -69,7 +93,8 @@ class SchoolClass
     }
 
     /**
-     * @return mixed
+     * get SchoolClass instructor
+     * @return string instructor
      */
     public function getInstructor()
     {
@@ -77,7 +102,8 @@ class SchoolClass
     }
 
     /**
-     * @return mixed
+     * get SchoolClass quarter
+     * @return string quarter
      */
     public function getQuarter()
     {
@@ -85,7 +111,8 @@ class SchoolClass
     }
 
     /**
-     * @return mixed
+     * get SchoolClass notes
+     * @return string notes
      */
     public function getNotes()
     {
@@ -93,11 +120,11 @@ class SchoolClass
     }
 
     /**
-     * @return mixed
+     * get SchoolClass year
+     * @return int year
      */
     public function getYear()
     {
         return $this->year;
     }
-
 }

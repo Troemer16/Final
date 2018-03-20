@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Contact
+ *
+ * This class represents a contact on a web dev portal
+ * and keeps track of the information that they
+ * will provide, such as name, title, email, phone
+ * @author Pavel Radchuk <pradchuk@greenriver.edu>
+ * @author Tyler Roemer <troemer@greenriver.edu>
+ * @copyright 2018
+ */
 class Contact
 {
     protected $name;
@@ -7,6 +17,13 @@ class Contact
     protected $email;
     protected $phone;
 
+    /**
+     * Contact constructor.
+     * @param $name name
+     * @param $title title
+     * @param $email email
+     * @param $phone phone
+     */
     public function __construct($name, $title, $email, $phone)
     {
         $this->setName($name);
@@ -16,7 +33,8 @@ class Contact
     }
 
     /**
-     * @param mixed $name
+     * set the contact name
+     * @param $name name
      */
     public function setName($name)
     {
@@ -24,7 +42,8 @@ class Contact
     }
 
     /**
-     * @param mixed $title
+     * set the contact title
+     * @param $title title
      */
     public function setTitle($title)
     {
@@ -32,7 +51,8 @@ class Contact
     }
 
     /**
-     * @param mixed $email
+     * set the contact email
+     * @param $email email
      */
     public function setEmail($email)
     {
@@ -41,7 +61,8 @@ class Contact
     }
 
     /**
-     * @param mixed $phone
+     * set the contact phone
+     * @param $phone phone
      */
     public function setPhone($phone)
     {
@@ -51,7 +72,8 @@ class Contact
 
 
     /**
-     * @return mixed
+     * get the contact name
+     * @return string name
      */
     public function getName()
     {
@@ -59,7 +81,8 @@ class Contact
     }
 
     /**
-     * @return mixed
+     * get the contact title
+     * @return string title
      */
     public function getTitle()
     {
@@ -67,7 +90,8 @@ class Contact
     }
 
     /**
-     * @return mixed
+     * get the contact Email
+     * @return string email
      */
     public function getEmail()
     {
@@ -75,7 +99,8 @@ class Contact
     }
 
     /**
-     * @return mixed
+     * get the contact Phone
+     * @return string phone
      */
     public function getPhone()
     {

@@ -19,6 +19,8 @@ div.tab-pane{
 }
 div.row{
     margin: 0px;
+    width: 100%;
+    align-content: center;
 }
 #city, #state, #zipCode{
     padding-left: 0em;
@@ -28,4 +30,7 @@ hr{
 }
 select.form-control.dropdown{
     -webkit-appearance: none;
+}
+table{
+    width: 95%;
 }

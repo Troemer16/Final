@@ -1,6 +1,8 @@
 var table = $('#pro-data').DataTable();
 table.column( 0 ).visible( false );
 
+
+
 $(document).on('click', '#projects tr', function () {
     var id = $(this).attr('id');
     var link = $(location).attr('href');
@@ -27,12 +29,12 @@ $(document).on('click', '#projects tr', function () {
             for(var i = 0; i < project.class.length; i++)
             {
                 $('#classes').append('<tr>' +
-                                        '<td>'+project.class[i]+'</td>' +
-                                        '<td>'+project.instructor[i]+'</td>' +
-                                        '<td>'+project.quarter[i]+'</td>' +
-                                        '<td>'+project.year[i]+'</td>' +
-                                        '<td>'+project.notes[i]+'</td>' +
-                                    '</tr>');
+                    '<td>'+project.class[i]+'</td>' +
+                    '<td>'+project.instructor[i]+'</td>' +
+                    '<td>'+project.quarter[i]+'</td>' +
+                    '<td>'+project.year[i]+'</td>' +
+                    '<td>'+project.notes[i]+'</td>' +
+                    '</tr>');
             }
             $.magnificPopup.open({
                 items: {
@@ -50,9 +52,11 @@ $(document).on('click', '#projects tr', function () {
     });
 });
 
+
 $("#dialog").dialog({
     autoOpen: false
 });
+
 
 $("#login").on('click', function() {
     $("#dialog").dialog('open');

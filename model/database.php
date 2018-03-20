@@ -65,7 +65,10 @@ final class Database
             'instructor' => array(),
             'quarter' => array(),
             'year' => array(),
-            'notes' => array()
+            'notes' => array(),
+            'clientId' => "",
+            'username' => "",
+            'password' => ""
         );
 
         /*
@@ -80,7 +83,7 @@ final class Database
 
         //Get Project details
         //Define the query
-        $sql = "SELECT title, description, links, status, clientId FROM projects
+        $sql = "SELECT title, description, links, status, username, password, clientId FROM projects
                 WHERE projectId = :id";
 
         //Prepare the statement
@@ -100,7 +103,9 @@ final class Database
         $project['description'] = $result['description'];
         $project['links'] = explode(', ', $result['links']);
         $project['status'] = $result['status'];
-        $clientId = $result['clientId'];
+        $project['clientId'] = $result['clientId'];
+        $project['username'] = $result['username'];
+        $project['password'] = $result['password'];
 
 
         //Get client details
@@ -112,7 +117,7 @@ final class Database
         $statement = self::$dbh->prepare($sql);
 
         //Bind the parameters
-        $statement->bindParam(':id', $clientId, PDO::PARAM_STR);
+        $statement->bindParam(':id', $project['clientId'], PDO::PARAM_STR);
 
         //Execute the statement
         $statement->execute();
@@ -138,7 +143,7 @@ final class Database
         $statement = self::$dbh->prepare($sql);
 
         //Bind the parameters
-        $statement->bindParam(':id', $clientId, PDO::PARAM_STR);
+        $statement->bindParam(':id', $project['clientId'], PDO::PARAM_STR);
 
         //Execute the statement
         $statement->execute();

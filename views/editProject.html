@@ -7,7 +7,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="styles/newProject.css">
+    <link rel="stylesheet" type="text/css" href="../styles/newProject.css">
 
     <title>Edit Project</title>
 </head>
@@ -21,10 +21,10 @@
     <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="../Final">View Project</a>
+                <a class="nav-link" href="../">View Project</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="create">New Project</a>
+                <a class="nav-link" href="../create">New Project</a>
             </li>
         </ul>
     </div>
@@ -146,13 +146,13 @@
                     <section id="contact" class="col-6">
                         <h2>Contact</h2>
                         <label for="contactName">Name</label>
-                        <input class="form-control" id="contactName" name="contactName" type="text" value="{{ @contactName }}"><br>
+                        <input class="form-control" id="contactName" name="contactName" type="text" value="{{ @contactName[0] }}"><br>
                         <label for="contactTitle">Title</label>
-                        <input class="form-control" id="contactTitle" name="contactTitle" type="text" value="{{ @contactTitle }}"><br>
+                        <input class="form-control" id="contactTitle" name="contactTitle" type="text" value="{{ @contactTitle[0] }}"><br>
                         <label for="contactEmail">Email</label>
-                        <input class="form-control" id="contactEmail" name="contactEmail" type="text" value="{{ @contactEmail }}"><br>
+                        <input class="form-control" id="contactEmail" name="contactEmail" type="text" value="{{ @contactEmail[0] }}"><br>
                         <label for="contactPhone">Phone</label>
-                        <input class="form-control" id="contactPhone" name="contactPhone" type="text" value="{{ @contactPhone }}"><br>
+                        <input class="form-control" id="contactPhone" name="contactPhone" type="text" value="{{ @contactPhone[0] }}"><br>
                     </section>
                 </div>
             </div>
@@ -181,28 +181,34 @@
                         <h2>Instructor Notes</h2>
                         <textarea name="instructNotes" type="inline" rows="11">{{ @instructNotes }}</textarea>
                     </section>
-                    <table id="class-data" class="table-responsive" cellspacing="0">
-                        <thead>
-                        <tr>
-                            <th>Class</th>
-                            <th>Instructor</th>
-                            <th>Quarter</th>
-                            <th>year</th>
-                        </tr>
-                        </thead>
 
-                        <tbody>
-                        <repeat group="{{ @classes }}" value="{{ @class }}">
-                            <tr id="{{ @class['classId'] }}">
-                                <td>{{ @class['Class'] }}</td>
-                                <td>{{ @class['Instructor'] }}</td>
-                                <td>{{ @class['Quarter'] }}</td>
-                                <td>{{ @class['year'] }}</td>
+                    <div class="row">
+                        <table id="class-data" class="table table-striped table-bordered" cellspacing="0">
+                            <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Instructor</th>
+                                <th>Quarter</th>
+                                <th>Year</th>
+                                <th>Notes</th>
                             </tr>
-                        </repeat>
+                            </thead>
 
-                        </tbody>
-                    </table>
+                            <tbody>
+                            <repeat group="{{ @classes }}" value="{{ @class }}">
+                                <tr>
+                                    <td>{{ @class[0] }}</td>
+                                    <td>{{ @class[1] }}</td>
+                                    <td>{{ @class[2] }}</td>
+                                    <td>{{ @class[3] }}</td>
+                                    <td>{{ @class[4] }}</td>
+                                </tr>
+                            </repeat>
+
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>

@@ -27,6 +27,7 @@
     //Define a default route
     $f3->route('GET|POST /', function($f3) {
         $projects = Database::getProjects();
+        $projects['links'] = explode(', ', $projects['links']);
         $f3->set('projects', $projects);
 
         if(!empty($_POST)){
@@ -101,7 +102,36 @@
         echo $template->render('views/createProject.html');
     });
 
-    $f3->route('GET /edit', function() {
+    $f3->route('GET /edit/@id', function($f3, $params) {
+        $project = Database::getProject($params['id']);
+
+        $classes = array();
+        for($i = 0; $i < sizeof($project['class']); $i++)
+            array_push($classes, array($project['class'][$i], $project['instructor'][$i],
+                $project['quarter'][$i], $project['year'][$i], $project['notes'][$i]));
+
+        //set Fat-Free Hive
+        $f3->set('curClient', $project['cClient']);
+        $f3->set('companyName', $project['companyName']);
+        $f3->set('address', $project['address']);
+        $f3->set('zipCode', $project['zipcode']);
+        $f3->set('city', $project['city']);
+        $f3->set('selState', $project['state']);
+        $f3->set('siteUrl', $project['siteURL']);
+        $f3->set('contactName', $project['contactName']);
+        $f3->set('contactTitle', $project['contactTitle']);
+        $f3->set('contactEmail', $project['email']);
+        $f3->set('contactPhone', $project['phone']);
+        $f3->set('classes', $classes);
+        $f3->set('title', $project['title']);
+        $f3->set('description', $project['description']);
+        $f3->set('username', $project['username']);
+        $f3->set('password', $project['password']);
+        $f3->set('status', $project['status']);
+        $f3->set('url', $project['links'][0]);
+        $f3->set('trello', $project['links'][1]);
+        $f3->set('github', $project['links'][2]);
+
         //load a template
         $template = new Template();
         echo $template->render('views/editProject.html');

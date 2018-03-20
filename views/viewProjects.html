@@ -45,7 +45,7 @@
             </ul>
         </div>
 
-        <a class="navbar-brand" href="#" id="login">Login</a>
+        <a class="navbar-brand" href="#" id="login">{{ @login }}</a>
 
     </nav>
 
@@ -163,7 +163,7 @@
     <!-- Log In dialog popup Html -->
     <div id="dialog" title="Log In">
         <form method="post" action="loginproc.php">
-            <input type="text" id="username" name="username" placeholder="Username" <?php if(!$_SESSION['login']) { echo 'value="'.$_SESSION['username'].'"'; } ?> required><br><br>
+            <input type="text" id="username" name="username" placeholder="Username" required><br><br>
             <input type="password" id="password" name="password" placeholder="Password" required><br><br>
             <button type="submit" class="btn btn-success">Log In</button>
             <br>

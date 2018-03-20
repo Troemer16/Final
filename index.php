@@ -26,6 +26,11 @@
 
     //Define a default route
     $f3->route('GET|POST /', function($f3) {
+        if($_SESSION['login'])
+            $f3->set('login', 'Logout');
+        else
+            $f3->set('login', 'Login');
+
         $projects = Database::getProjects();
         foreach ($projects as &$project)
             $project['links'] = explode(', ', $project['links']);
@@ -44,6 +49,10 @@
     });
 
     $f3->route('GET|POST /create', function($f3) {
+        if(!$_SESSION['login'])
+            header("location:http://troemer.greenriverdev.com/328/Final/");
+
+
         $clients = Database::getClients();
         $f3->set('clients', $clients);
 
@@ -104,6 +113,9 @@
     });
 
     $f3->route('GET|POST /edit/@id', function($f3, $params) {
+        if(!$_SESSION['login'])
+            header("location:http://troemer.greenriverdev.com/328/Final/");
+
 
         $project = Database::getProject($params['id']);
 

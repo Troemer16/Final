@@ -1,8 +1,8 @@
 <?php
     session_start();
 
-    $username = 'budlight';
-    $password = 'dilly-dilly';
+    $username = 'admin';
+    $password = '@dmin';
 
     if($_SESSION['login']){
         $_SESSION['login'] = false;

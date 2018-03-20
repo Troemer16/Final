@@ -40,12 +40,12 @@
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link " href="create">New Project</a>
+                    <a id="newProject" class="nav-link " href="create">New Project</a>
                 </li>
             </ul>
         </div>
 
-        <a class="navbar-brand" href="#" id="login">{{ @login }}</a>
+        <a class="navbar-brand" href="{{ @login }}" id="login">{{ ucfirst(@login) }}</a>
 
     </nav>
 

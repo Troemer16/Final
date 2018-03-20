@@ -1,32 +1,44 @@
 var table = $('#pro-data').DataTable();
 table.column( 0 ).visible( false );
-var isLoggedIn = false;
 
 function login(location) {
-    if(isLoggedIn)
-        isLoggedIn = false;
-    else
+    if($('#login').attr('href') == 'login'){
         $("#dialog").dialog('open');
-    $(document).on('click', '#dialog button', function (e){
-        e.preventDefault();
+        $(document).on('click', '#dialog button', function (e){
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "http://troemer.greenriverdev.com/328/Final/loginproc.php",
+                data: { location: location, username: $('#username').val(), password: $('#password').val() },
+                success: function (data) {
+                    if(data == -1)
+                        alert("Error: Invalid username or password");
+                    else
+                        window.location.href = location;
+                },
+                error: function(xhr, status, error) {
+                    alert(error);
+                },
+                dataType:"json"
+            });
+        });
+    } else {
         $.ajax({
             type: "POST",
             url: "http://troemer.greenriverdev.com/328/Final/loginproc.php",
-            data: { location: location, username: $('#username').val(), password: $('#password').val() },
+            data: { location: location },
             success: function (data) {
                 if(data == -1)
                     alert("Error: Invalid username or password");
-                else {
-                    isLoggedIn = true;
+                else
                     window.location.href = location;
-                }
             },
             error: function(xhr, status, error) {
                 alert(error);
             },
             dataType:"json"
         });
-    });
+    }
 }
 
 $(document).on('click', '#login', function (e) {
@@ -35,7 +47,7 @@ $(document).on('click', '#login', function (e) {
 });
 
 $(document).on('click', '#edit', function () {
-    if(isLoggedIn)
+    if($('#login').attr('href') == 'logout')
         window.location.href = "http://troemer.greenriverdev.com/328/Final/edit/" + $(this).val();
     else{
         var id = $(this).val();
@@ -43,6 +55,13 @@ $(document).on('click', '#edit', function () {
         login("http://troemer.greenriverdev.com/328/Final/edit/" + id);
     }
 
+});
+
+$(document).on('click', '#newProject', function (e) {
+    if($('#login').attr('href') == 'login'){
+        e.preventDefault();
+        login("http://troemer.greenriverdev.com/328/Final/" + $(this).attr('href'));
+    }
 });
 
 $("#projects tr a").click(function(e) {

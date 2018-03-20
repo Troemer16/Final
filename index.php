@@ -27,9 +27,9 @@
     //Define a default route
     $f3->route('GET|POST /', function($f3) {
         if($_SESSION['login'])
-            $f3->set('login', 'Logout');
+            $f3->set('login', 'logout');
         else
-            $f3->set('login', 'Login');
+            $f3->set('login', 'login');
 
         $projects = Database::getProjects();
         foreach ($projects as &$project)
